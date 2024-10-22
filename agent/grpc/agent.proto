@@ -1,0 +1,123 @@
+syntax = "proto3";
+
+package agent;
+
+option go_package = "./agent";
+
+import "google/api/annotations.proto";
+
+service Agent {
+    rpc CreatePod (PodRequest) returns (PodResponse) {
+        // http option
+        option (google.api.http) = {
+            post: "/pod/create"
+            body: "*"
+        };
+    }
+    rpc UpdatePod (PodRequest) returns (PodResponse) {
+        // http option
+        option (google.api.http) = {
+            post: "/pod/update"
+            body: "*"
+        };
+    }
+    rpc DeletePod (PodDeleteRequest) returns (PodResponse) {
+        // http option
+        option (google.api.http) = {
+            post: "/pod/delete"
+            body: "*"
+        };
+    }
+    rpc CreateNode (NodeRequest) returns (NodeResponse) {
+        // http option
+        option (google.api.http) = {
+            post: "/node/create"
+            body: "*"
+        };
+    }
+    rpc UpdateNode (NodeRequest) returns (NodeResponse) {
+        // http option
+        option (google.api.http) = {
+            post: "/node/update"
+            body: "*"
+        };
+    }
+    rpc DeleteNode (NodeRequest) returns (NodeResponse) {
+        // http option
+        option (google.api.http) = {
+            post: "/node/delete"
+            body: "*"
+        };
+    }
+}
+
+enum ActionCode {
+    SuccessCode = 0;
+    FailCode = -1;
+}
+
+message NetworkInfo {
+    string ip = 1;
+    string vlan = 2;
+    string gateway = 3;
+}
+
+message Container {
+    string name = 1;
+    string image = 2;
+    repeated string cmd = 3;
+    repeated string args = 4;
+    int64 cpu = 5;
+    int64 ram = 6;
+    int64 gpu = 7;
+    map<string, string> env = 8;
+}
+
+message Pod {
+    string name = 1;
+    string id = 2;
+    NetworkInfo network = 3;
+    repeated Container containers = 4;
+}
+
+message PodRequest  {
+    string gpu_type = 1;
+    string cpu_type = 2;
+    string customer_id = 3;
+    string user_id = 4;
+    string restart_policy = 5;
+    repeated Pod pods = 6;
+}
+
+message PodDeleteRequest  {
+    string customer_id = 1;
+    string user_id = 2;
+    string name = 3;
+}
+
+message PodResponse  {
+    ActionCode code   = 1;
+    string  message   = 2;
+}
+
+message IpPoolSegments {
+    string vlan = 1;
+    string subnet = 2;
+    string gateway = 3;
+    string available_zone_id = 4;
+    repeated string start_end = 5;
+}
+
+message NodeRequest  {
+    string kube_config = 1;
+    repeated IpPoolSegments ip_pool_segments = 2;
+    string customer_id = 3;
+    string user_id = 4;
+    string vk_name = 5;
+}
+
+message NodeResponse  {
+    ActionCode code   = 1;
+    string  message   = 2;
+}
+
