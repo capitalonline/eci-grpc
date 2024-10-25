@@ -1,0 +1,45 @@
+// protoc --go_out=plugins=grpc:. *.proto
+
+syntax = "proto3";
+
+package pod;
+
+option go_package = " repos.capitalonline.net/cloud-native/eci-service/api/pb/pod/v1";
+
+
+service EciService {
+  rpc SavePod(EciPod) returns (SavePodResp) {}
+}
+
+
+message EciPod {
+  string CustomerId = 1;
+  string UserId = 2;
+  string VNodeId = 3;
+  Pod Pod = 4;
+
+}
+
+message Pod {
+  string Name = 1;
+  string Id = 2;
+  string Status = 3;
+  NetworkInfo network = 4;
+  int32 Cpu = 5;
+  int32 Ram = 6;
+  int32 Gpu = 7;
+  string CpuType = 8;
+  string GpuType = 9;
+}
+
+
+message NetworkInfo {
+  string Ip = 1;
+  string Vlan = 2;
+  string Gateway = 3;
+}
+
+message SavePodResp {
+  string Code = 1; // v: required
+  string Msg = 2; // v: required
+}
