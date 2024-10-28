@@ -4,11 +4,18 @@ syntax = "proto3";
 
 package pod;
 
-option go_package = " repos.capitalonline.net/cloud-native/eci-service/api/pb/pod/v1";
+option go_package = "./pod";
 
+import "google/api/annotations.proto";
 
 service EciService {
-  rpc SavePod(EciPod) returns (SavePodResp) {}
+  rpc SavePod(EciPod) returns (SavePodResp) {
+    // http option
+    option (google.api.http) = {
+      post: "/grpc/save_pod"
+      body: "*"
+    };
+  }
 }
 
 
@@ -17,7 +24,6 @@ message EciPod {
   string UserId = 2;
   string VNodeId = 3;
   Pod Pod = 4;
-
 }
 
 message Pod {
