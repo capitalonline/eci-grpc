@@ -6,7 +6,7 @@ Package pod is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package pod
+package v1
 
 import (
 	"context"

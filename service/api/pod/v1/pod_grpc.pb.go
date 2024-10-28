@@ -4,7 +4,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.2
-// source: pod/v1/pod.proto
+// source: pod.proto
 
 package v1
 
@@ -119,5 +119,5 @@ var EciService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pod/v1/pod.proto",
+	Metadata: "pod.proto",
 }
