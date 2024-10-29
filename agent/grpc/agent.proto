@@ -63,9 +63,11 @@ message Container {
 message Pod {
     string id = 1;
     string name = 2;
-    NetworkInfo network = 3;
-    repeated Container containers = 4;
-    string namespace = 5;
+    int64 cpu = 3;
+    int64 ram = 4;
+    NetworkInfo network = 5;
+    repeated Container containers = 6;
+    string namespace = 7;
 }
 
 message configFileData {
