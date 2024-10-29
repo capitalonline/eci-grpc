@@ -61,11 +61,10 @@ message Container {
 }
 
 message Pod {
-    string name = 1;
-    string id = 2;
-    NetworkInfo network = 3;
-    repeated Container containers = 4;
-    string namespace = 5;
+    string id = 1;
+    NetworkInfo network = 2;
+    repeated Container containers = 3;
+    string namespace = 4;
 }
 
 message configFileData {
@@ -110,7 +109,7 @@ message PodRequest  {
 message PodDeleteRequest  {
     string customer_id = 1;
     string user_id = 2;
-    string name = 3;
+    string id = 3;
 }
 
 message PodResponse  {
