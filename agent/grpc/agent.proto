@@ -130,6 +130,10 @@ message NodeRequest  {
     string customer_id = 3;
     string user_id = 4;
     string vk_name = 5;
+    string vk_id = 6;
+    string vk_eip = 7;
+    string vk_port = 8;
+    IpPoolSegments vk_private_net = 9;
 }
 
 message NodeResponse  {
