@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+package agent;
+
+option go_package = "./agent";
+
+import "k8s.io/api/core/v1/generated.proto";
+
+service Agent {
+    rpc CreatePod (PodRequest) returns (PodResponse) {
+
+    }
+    rpc UpdatePod (PodRequest) returns (PodResponse) {
+
+    }
+    rpc DeletePod (PodDeleteRequest) returns (PodResponse) {
+
+    }
+    rpc CreateNode (NodeRequest) returns (NodeResponse) {
+
+    }
+    rpc UpdateNode (NodeRequest) returns (NodeResponse) {
+
+    }
+    rpc DeleteNode (NodeRequest) returns (NodeResponse) {
+
+    }
+}
+
+enum ActionCode {
+    SuccessCode = 0;
+    FailCode = -1;
+}
+
+message NetworkInfo {
+    string ip = 1;
+    string vlan = 2;
+    string gateway = 3;
+}
+
+message Env {
+    string key = 1;
+    string value = 2;
+}
+
+message MountsPath {
+    string name = 1;
+    bool read_only = 2;
+    string mount_path = 3;
+    string sub_path = 4;
+}
+
+message Container {
+    string name = 1;
+    string image = 2;
+    repeated string cmd = 3;
+    repeated string args = 4;
+    int64 cpu = 5;
+    int64 ram = 6;
+    int64 gpu = 7;
+    repeated Env env = 8;
+    repeated MountsPath mounts_path = 9;
+}
+
+message Pod {
+    string name = 1;
+    string id = 2;
+    NetworkInfo network = 3;
+    repeated Container containers = 4;
+}
+
+message configFileData {
+    string path  = 1;
+    string file_content = 2;
+}
+
+message ConfigFile {
+    string name = 1;
+    repeated configFileData data = 2;
+}
+
+message EmptyDir {
+    string name = 1;
+    int64 shm = 2;
+}
+
+message Nfs {
+    string name = 1;
+    string path = 2;
+    string server_ip = 3;
+}
+
+message VolumeInfo {
+    repeated ConfigFile conf_files = 1;
+    repeated EmptyDir empty_dir = 2;
+    repeated Nfs nfs = 3;
+}
+
+message PodRequest  {
+    optional k8s.io.api.core.v1.Pod pod = 1;
+    string gpu_type = 2;
+    string cpu_type = 3;
+    string customer_id = 4;
+    string user_id = 5;
+    string restart_policy = 6;
+    repeated Pod pods = 7;
+    int64 temp_store_size = 8;
+    VolumeInfo volumes = 9;
+}
+
+message PodDeleteRequest  {
+    string customer_id = 1;
+    string user_id = 2;
+    string name = 3;
+}
+
+message PodResponse  {
+    ActionCode code   = 1;
+    string  message   = 2;
+}
+
+message IpPoolSegments {
+    string vlan = 1;
+    string subnet = 2;
+    string gateway = 3;
+    string available_zone_id = 4;
+    repeated string start_end = 5;
+}
+
+message NodeRequest  {
+    string kube_config = 1;
+    repeated IpPoolSegments ip_pool_segments = 2;
+    string customer_id = 3;
+    string user_id = 4;
+    string vk_name = 5;
+    string vk_id = 6;
+    string vk_eip = 7;
+    string vk_port = 8;
+    IpPoolSegments vk_private_net = 9;
+}
+
+message NodeResponse  {
+    ActionCode code   = 1;
+    string  message   = 2;
+}
+
