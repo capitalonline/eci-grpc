@@ -100,7 +100,7 @@ message VolumeInfo {
 }
 
 message PodRequest  {
-    optional k8s.io.api.core.v1.Pod nativePod = 1;
+    optional k8s.io.api.core.v1.Pod rawPod = 1;
     string gpu_type = 2;
     string cpu_type = 3;
     string customer_id = 4;
