@@ -1,0 +1,1 @@
+protoc --proto_path=./protobuf --go_out=paths=source_relative:./api --go-grpc_out=paths=source_relative:./api ./protobuf/pod/v1/pod.proto

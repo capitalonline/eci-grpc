@@ -1,1 +1,0 @@
-protoc -I=./ -I=../ --go_out=../../../api/pod/v1 --go_opt=paths=source_relative --go-grpc_out=../../../api/pod/v1 --go-grpc_opt=paths=source_relative  --grpc-gateway_out=../../../api/pod/v1 --grpc-gateway_opt=paths=source_relative ./pod.proto
