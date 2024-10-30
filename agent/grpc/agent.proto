@@ -116,6 +116,7 @@ message PodDeleteRequest  {
     string customer_id = 1;
     string user_id = 2;
     string id = 3;
+    string vnode_id = 4;
 }
 
 message PodResponse  {
