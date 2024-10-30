@@ -3,8 +3,6 @@ module github.com/capitalonline/eci-grpc
 go 1.23
 
 require (
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20240814211410-ddb44dafa142
 	google.golang.org/grpc v1.67.1
 	google.golang.org/protobuf v1.35.1
 	k8s.io/api v0.0.0-00010101000000-000000000000

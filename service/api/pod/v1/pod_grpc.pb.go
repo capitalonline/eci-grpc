@@ -4,9 +4,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.2
-// source: pod.proto
+// source: pod/v1/pod.proto
 
-package v1
+package pod
 
 import (
 	context "context"
@@ -119,5 +119,5 @@ var EciService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "pod.proto",
+	Metadata: "pod/v1/pod.proto",
 }

@@ -6,16 +6,10 @@ package pod;
 
 option go_package = "./pod";
 
-import "google/api/annotations.proto";
+
 
 service EciService {
-  rpc SavePod(EciPod) returns (SavePodResp) {
-    // http option
-    option (google.api.http) = {
-      post: "/grpc/save_pod"
-      body: "*"
-    };
-  }
+  rpc SavePod(EciPod) returns (SavePodResp) {}
 }
 
 
