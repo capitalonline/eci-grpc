@@ -4,8 +4,6 @@ package agent;
 
 option go_package = "./agent";
 
-import "k8s.io/api/core/v1/generated.proto";
-
 service Agent {
     rpc CreatePod (PodRequest) returns (PodResponse) {
 
@@ -67,6 +65,7 @@ message Pod {
     string id = 2;
     NetworkInfo network = 3;
     repeated Container containers = 4;
+    string namespace = 5;
 }
 
 message configFileData {
@@ -97,15 +96,15 @@ message VolumeInfo {
 }
 
 message PodRequest  {
-    optional k8s.io.api.core.v1.Pod pod = 1;
-    string gpu_type = 2;
-    string cpu_type = 3;
-    string customer_id = 4;
-    string user_id = 5;
-    string restart_policy = 6;
-    repeated Pod pods = 7;
-    int64 temp_store_size = 8;
-    VolumeInfo volumes = 9;
+    string gpu_type = 1;
+    string cpu_type = 2;
+    string customer_id = 3;
+    string user_id = 4;
+    string restart_policy = 5;
+    repeated Pod pods = 6;
+    int64 temp_store_size = 7;
+    VolumeInfo volumes = 8;
+    string vnode_id = 9;
 }
 
 message PodDeleteRequest  {
@@ -135,7 +134,7 @@ message NodeRequest  {
     string vk_name = 5;
     string vk_id = 6;
     string vk_eip = 7;
-    string vk_port = 8;
+    int64 vk_port = 8;
     IpPoolSegments vk_private_net = 9;
 }
 
