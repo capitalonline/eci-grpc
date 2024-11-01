@@ -126,6 +126,14 @@ message IpPoolSegments {
     repeated string start_end = 5;
 }
 
+message vlanInfo {
+    string vlan = 1;
+    string gateway = 2;
+    string subnet = 3;
+    string ip = 4;
+    string eip = 5;
+}
+
 message NodeRequest  {
     string kube_config = 1;
     repeated IpPoolSegments ip_pool_segments = 2;
@@ -136,6 +144,7 @@ message NodeRequest  {
     string vk_eip = 7;
     int64 vk_port = 8;
     IpPoolSegments vk_private_net = 9;
+    vlanInfo vk_info = 10;
 }
 
 message NodeResponse  {
