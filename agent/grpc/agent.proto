@@ -134,16 +134,21 @@ message IpPoolSegments {
     repeated string start_end = 5;
 }
 
+message PrivateNet {
+    string vlan = 1;
+    string subnet = 2;
+    string gateway = 3;
+    string ip = 4;
+    string eip = 5;
+}
+
 message NodeRequest  {
     string kube_config = 1;
     repeated IpPoolSegments ip_pool_segments = 2;
     string customer_id = 3;
     string user_id = 4;
-    string vk_name = 5;
-    string vk_id = 6;
-    string vk_eip = 7;
-    int64 vk_port = 8;
-    IpPoolSegments vk_private_net = 9;
+    string id = 5;
+    PrivateNet private_net = 6;
 }
 
 message NodeResponse  {
