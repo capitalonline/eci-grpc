@@ -7,24 +7,15 @@ option go_package = "./agent";
 import "k8s.io/api/core/v1/generated.proto";
 
 service Agent {
-    rpc CreatePod (PodRequest) returns (PodResponse) {
-
-    }
-    rpc UpdatePod (PodRequest) returns (PodResponse) {
-
-    }
-    rpc DeletePod (PodDeleteRequest) returns (PodResponse) {
-
-    }
-    rpc CreateNode (NodeRequest) returns (NodeResponse) {
-
-    }
-    rpc UpdateNode (NodeRequest) returns (NodeResponse) {
-
-    }
-    rpc DeleteNode (NodeRequest) returns (NodeResponse) {
-
-    }
+    rpc CreatePod (PodRequest) returns (PodResponse) {}
+    rpc UpdatePod (PodRequest) returns (PodResponse) {}
+    rpc DeletePod (PodDeleteRequest) returns (PodResponse) {}
+    rpc GetPod (PodInfoRequest) returns (PodInfoResponse) {}
+    rpc GetPods (PodInfoRequest) returns (PodInfoResponse) {}
+    rpc GetPodStatus (PodInfoRequest) returns (PodInfoResponse) {}
+    rpc CreateNode (NodeRequest) returns (NodeResponse) {}
+    rpc UpdateNode (NodeRequest) returns (NodeResponse) {}
+    rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
 }
 
 enum ActionCode {
@@ -100,6 +91,12 @@ message VolumeInfo {
     repeated Nfs nfs = 3;
 }
 
+message PodInfoRequest  {
+    string namespace = 1;
+    string name = 2;
+    string vnode_id = 3;
+}
+
 message PodRequest  {
     optional k8s.io.api.core.v1.Pod rawPod = 1;
     string gpu_type = 2;
@@ -125,6 +122,12 @@ message PodDeleteRequest  {
 message PodResponse  {
     ActionCode code   = 1;
     string  message   = 2;
+}
+
+message PodInfoResponse  {
+    ActionCode code   = 1;
+    string  message   = 2;
+    repeated k8s.io.api.core.v1.Pod podList = 3;
 }
 
 message IpPoolSegments {

@@ -19,12 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Agent_CreatePod_FullMethodName  = "/agent.Agent/CreatePod"
-	Agent_UpdatePod_FullMethodName  = "/agent.Agent/UpdatePod"
-	Agent_DeletePod_FullMethodName  = "/agent.Agent/DeletePod"
-	Agent_CreateNode_FullMethodName = "/agent.Agent/CreateNode"
-	Agent_UpdateNode_FullMethodName = "/agent.Agent/UpdateNode"
-	Agent_DeleteNode_FullMethodName = "/agent.Agent/DeleteNode"
+	Agent_CreatePod_FullMethodName    = "/agent.Agent/CreatePod"
+	Agent_UpdatePod_FullMethodName    = "/agent.Agent/UpdatePod"
+	Agent_DeletePod_FullMethodName    = "/agent.Agent/DeletePod"
+	Agent_GetPod_FullMethodName       = "/agent.Agent/GetPod"
+	Agent_GetPods_FullMethodName      = "/agent.Agent/GetPods"
+	Agent_GetPodStatus_FullMethodName = "/agent.Agent/GetPodStatus"
+	Agent_CreateNode_FullMethodName   = "/agent.Agent/CreateNode"
+	Agent_UpdateNode_FullMethodName   = "/agent.Agent/UpdateNode"
+	Agent_DeleteNode_FullMethodName   = "/agent.Agent/DeleteNode"
 )
 
 // AgentClient is the client API for Agent service.
@@ -34,6 +37,9 @@ type AgentClient interface {
 	CreatePod(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*PodResponse, error)
 	UpdatePod(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*PodResponse, error)
 	DeletePod(ctx context.Context, in *PodDeleteRequest, opts ...grpc.CallOption) (*PodResponse, error)
+	GetPod(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
+	GetPods(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
+	GetPodStatus(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	CreateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	UpdateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	DeleteNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
@@ -77,6 +83,36 @@ func (c *agentClient) DeletePod(ctx context.Context, in *PodDeleteRequest, opts 
 	return out, nil
 }
 
+func (c *agentClient) GetPod(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PodInfoResponse)
+	err := c.cc.Invoke(ctx, Agent_GetPod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentClient) GetPods(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PodInfoResponse)
+	err := c.cc.Invoke(ctx, Agent_GetPods_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentClient) GetPodStatus(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PodInfoResponse)
+	err := c.cc.Invoke(ctx, Agent_GetPodStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *agentClient) CreateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(NodeResponse)
@@ -114,6 +150,9 @@ type AgentServer interface {
 	CreatePod(context.Context, *PodRequest) (*PodResponse, error)
 	UpdatePod(context.Context, *PodRequest) (*PodResponse, error)
 	DeletePod(context.Context, *PodDeleteRequest) (*PodResponse, error)
+	GetPod(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
+	GetPods(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
+	GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	CreateNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	UpdateNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	DeleteNode(context.Context, *NodeRequest) (*NodeResponse, error)
@@ -135,6 +174,15 @@ func (UnimplementedAgentServer) UpdatePod(context.Context, *PodRequest) (*PodRes
 }
 func (UnimplementedAgentServer) DeletePod(context.Context, *PodDeleteRequest) (*PodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePod not implemented")
+}
+func (UnimplementedAgentServer) GetPod(context.Context, *PodInfoRequest) (*PodInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPod not implemented")
+}
+func (UnimplementedAgentServer) GetPods(context.Context, *PodInfoRequest) (*PodInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPods not implemented")
+}
+func (UnimplementedAgentServer) GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPodStatus not implemented")
 }
 func (UnimplementedAgentServer) CreateNode(context.Context, *NodeRequest) (*NodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateNode not implemented")
@@ -220,6 +268,60 @@ func _Agent_DeletePod_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Agent_GetPod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PodInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetPod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetPod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetPod(ctx, req.(*PodInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Agent_GetPods_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PodInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetPods(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetPods_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetPods(ctx, req.(*PodInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Agent_GetPodStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PodInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetPodStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetPodStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetPodStatus(ctx, req.(*PodInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Agent_CreateNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NodeRequest)
 	if err := dec(in); err != nil {
@@ -292,6 +394,18 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeletePod",
 			Handler:    _Agent_DeletePod_Handler,
+		},
+		{
+			MethodName: "GetPod",
+			Handler:    _Agent_GetPod_Handler,
+		},
+		{
+			MethodName: "GetPods",
+			Handler:    _Agent_GetPods_Handler,
+		},
+		{
+			MethodName: "GetPodStatus",
+			Handler:    _Agent_GetPodStatus_Handler,
 		},
 		{
 			MethodName: "CreateNode",
