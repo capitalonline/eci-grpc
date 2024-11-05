@@ -67,9 +67,10 @@ message Pod {
     string name = 2;
     int64 cpu = 3;
     int64 ram = 4;
-    NetworkInfo network = 5;
-    repeated Container containers = 6;
-    string namespace = 7;
+    int64 gpu = 5;
+    NetworkInfo network = 6;
+    repeated Container containers = 7;
+    string namespace = 8;
 }
 
 message configFileData {
