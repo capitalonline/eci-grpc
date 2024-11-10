@@ -148,6 +148,8 @@ message NodeRequest  {
     string user_id = 4;
     string id = 5;
     PrivateNet private_net = 6;
+    repeated k8s.io.api.core.v1.Taint Taints = 7;
+    map<string, string> labels  = 8;
 }
 
 message NodeResponse  {
