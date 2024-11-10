@@ -73,34 +73,6 @@ message Pod {
     NetworkInfo network = 6;
     repeated Container containers = 7;
     string namespace = 8;
-    repeated PodVolume volumes = 9;
-}
-
-message configFileData {
-    string path  = 1;
-    string file_content = 2;
-}
-
-message ConfigFile {
-    string name = 1;
-    repeated configFileData data = 2;
-}
-
-message EmptyDir {
-    string name = 1;
-    int64 shm = 2;
-}
-
-message Nfs {
-    string name = 1;
-    string path = 2;
-    string server_ip = 3;
-}
-
-message VolumeInfo {
-    repeated ConfigFile conf_files = 1;
-    repeated EmptyDir empty_dir = 2;
-    repeated Nfs nfs = 3;
 }
 
 message PodInfoRequest  {
@@ -118,7 +90,7 @@ message PodRequest  {
     string restart_policy = 6;
     repeated Pod pods = 7;
     int64 temp_store_size = 8;
-    VolumeInfo volumes = 9;
+    repeated PodVolume volumes = 9;
     string vnode_id = 10;
 }
 
