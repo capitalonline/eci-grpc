@@ -34,13 +34,6 @@ message Env {
     string value = 2;
 }
 
-message MountsPath {
-    string name = 1;
-    bool read_only = 2;
-    string mount_path = 3;
-    string sub_path = 4;
-}
-
 message Container {
     string name = 1;
     string image = 2;
@@ -50,7 +43,25 @@ message Container {
     int64 ram = 6;
     int64 gpu = 7;
     repeated Env env = 8;
-    repeated MountsPath mounts_path = 9;
+    repeated k8s.io.api.core.v1.VolumeMount volumeMounts = 9;
+}
+
+message configData {
+    string path = 1;
+    string fileContent = 2;
+}
+
+message configFileSource {
+    repeated configData data = 1;
+}
+
+message PodVolume {
+    string name = 1;
+    optional k8s.io.api.core.v1.NFSVolumeSource nfs = 2;
+    optional k8s.io.api.core.v1.SecretVolumeSource secret = 3;
+    optional k8s.io.api.core.v1.EmptyDirVolumeSource emptyDir = 4;
+    optional k8s.io.api.core.v1.ConfigMapVolumeSource configMap = 5;
+    optional configFileSource configFiles = 6;
 }
 
 message Pod {
@@ -62,6 +73,7 @@ message Pod {
     NetworkInfo network = 6;
     repeated Container containers = 7;
     string namespace = 8;
+    repeated PodVolume volumes = 9;
 }
 
 message configFileData {
