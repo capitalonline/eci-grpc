@@ -102,6 +102,7 @@ message PodRequest  {
     int64 temp_store_size = 8;
     repeated PodVolume volumes = 9;
     string vnode_id = 10;
+    repeated k8s.io.api.core.v1.Secret ImagePullSecrets = 11;
 }
 
 message PodDeleteRequest  {
