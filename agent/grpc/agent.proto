@@ -105,10 +105,15 @@ message PodResponse  {
     string  message   = 2;
 }
 
+message Pods {
+    NetworkInfo network = 1;
+    optional k8s.io.api.core.v1.Pod pod = 2;
+}
+
 message PodInfoResponse  {
     ActionCode code   = 1;
     string  message   = 2;
-    repeated k8s.io.api.core.v1.Pod podList = 3;
+    Pods pods = 3;
 }
 
 message IpPoolSegments {
