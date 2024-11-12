@@ -113,7 +113,7 @@ message Pods {
 message PodInfoResponse  {
     ActionCode code   = 1;
     string  message   = 2;
-    Pods pods = 3;
+    repeated Pods pods = 3;
 }
 
 message IpPoolSegments {
