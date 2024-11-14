@@ -30,6 +30,7 @@ message Pod {
   int32 Gpu = 7;
   string CpuType = 8;
   string GpuType = 9;
+  bool Boot = 10;
 }
 
 
