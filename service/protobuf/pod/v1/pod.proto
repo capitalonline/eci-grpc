@@ -31,6 +31,7 @@ message Pod {
   string CpuType = 8;
   string GpuType = 9;
   bool Boot = 10;
+  string RestartPolicy = 11;
 }
 
 
