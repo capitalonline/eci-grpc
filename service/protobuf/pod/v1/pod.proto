@@ -10,6 +10,7 @@ option go_package = "./pod";
 
 service EciService {
   rpc SavePod(EciPod) returns (SavePodResp) {}
+  rpc SaveVNode(EciVNode) returns (SaveVNodeResp) {}
 }
 
 
@@ -42,6 +43,18 @@ message NetworkInfo {
 }
 
 message SavePodResp {
+  string Code = 1; // v: required
+  string Msg = 2; // v: required
+}
+
+message EciVNode {
+  string CustomerId = 1;
+  string UserId = 2;
+  string VNodeId = 3;
+  string Status = 4;
+}
+
+message SaveVNodeResp {
   string Code = 1; // v: required
   string Msg = 2; // v: required
 }

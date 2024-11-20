@@ -21,7 +21,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EciService_SavePod_FullMethodName = "/pod.EciService/SavePod"
+	EciService_SavePod_FullMethodName   = "/pod.EciService/SavePod"
+	EciService_SaveVNode_FullMethodName = "/pod.EciService/SaveVNode"
 )
 
 // EciServiceClient is the client API for EciService service.
@@ -29,6 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EciServiceClient interface {
 	SavePod(ctx context.Context, in *EciPod, opts ...grpc.CallOption) (*SavePodResp, error)
+	SaveVNode(ctx context.Context, in *EciVNode, opts ...grpc.CallOption) (*SaveVNodeResp, error)
 }
 
 type eciServiceClient struct {
@@ -49,11 +51,22 @@ func (c *eciServiceClient) SavePod(ctx context.Context, in *EciPod, opts ...grpc
 	return out, nil
 }
 
+func (c *eciServiceClient) SaveVNode(ctx context.Context, in *EciVNode, opts ...grpc.CallOption) (*SaveVNodeResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SaveVNodeResp)
+	err := c.cc.Invoke(ctx, EciService_SaveVNode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EciServiceServer is the server API for EciService service.
 // All implementations must embed UnimplementedEciServiceServer
 // for forward compatibility.
 type EciServiceServer interface {
 	SavePod(context.Context, *EciPod) (*SavePodResp, error)
+	SaveVNode(context.Context, *EciVNode) (*SaveVNodeResp, error)
 	mustEmbedUnimplementedEciServiceServer()
 }
 
@@ -66,6 +79,9 @@ type UnimplementedEciServiceServer struct{}
 
 func (UnimplementedEciServiceServer) SavePod(context.Context, *EciPod) (*SavePodResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SavePod not implemented")
+}
+func (UnimplementedEciServiceServer) SaveVNode(context.Context, *EciVNode) (*SaveVNodeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveVNode not implemented")
 }
 func (UnimplementedEciServiceServer) mustEmbedUnimplementedEciServiceServer() {}
 func (UnimplementedEciServiceServer) testEmbeddedByValue()                    {}
@@ -106,6 +122,24 @@ func _EciService_SavePod_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EciService_SaveVNode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EciVNode)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EciServiceServer).SaveVNode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EciService_SaveVNode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EciServiceServer).SaveVNode(ctx, req.(*EciVNode))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EciService_ServiceDesc is the grpc.ServiceDesc for EciService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -116,6 +150,10 @@ var EciService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SavePod",
 			Handler:    _EciService_SavePod_Handler,
+		},
+		{
+			MethodName: "SaveVNode",
+			Handler:    _EciService_SaveVNode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
