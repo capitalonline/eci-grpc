@@ -130,7 +130,7 @@ message NodeQuantity {
 
 message NodeRequest  {
     string kube_config = 1;
-    repeated IpPoolSegments ip_pool_segments = 2;
+    map<string, IpPoolSegments> ip_pool_segments = 2;
     string customer_id = 3;
     string user_id = 4;
     string id = 5;
