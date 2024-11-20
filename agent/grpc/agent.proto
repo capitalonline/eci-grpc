@@ -34,15 +34,6 @@ message Env {
     string value = 2;
 }
 
-message configData {
-    string path = 1;
-    string fileContent = 2;
-}
-
-message configFileSource {
-    repeated configData data = 1;
-}
-
 message ConfigMapVolume {
     optional k8s.io.api.core.v1.ConfigMap source = 1;
     optional k8s.io.api.core.v1.ConfigMapVolumeSource volume = 2;
@@ -53,26 +44,11 @@ message SecretVolume {
     optional k8s.io.api.core.v1.SecretVolumeSource volume = 2;
 }
 
-message PodVolume {
-    string name = 1;
-    optional k8s.io.api.core.v1.NFSVolumeSource nfs = 2;
-    optional k8s.io.api.core.v1.EmptyDirVolumeSource emptyDir = 3;
-    SecretVolume secret = 4;
-    ConfigMapVolume configMap = 5;
-    optional configFileSource configFiles = 6;
-}
-
 message Pod {
     string id = 1;
-    string name = 2;
+    string containerGroupName = 2;
     NetworkInfo network = 3;
     optional k8s.io.api.core.v1.Pod rawPod = 4;
-}
-
-message PodInfoRequest  {
-    string namespace = 1;
-    string name = 2;
-    string vnode_id = 3;
 }
 
 message PodRequest  {
@@ -86,9 +62,9 @@ message PodRequest  {
     int64 gpu = 8;
     repeated Pod pods = 9;
     int64 temp_store_size = 10;
-    repeated PodVolume volumes = 11;
     string vnode_id = 12;
-    repeated k8s.io.api.core.v1.Secret ImagePullSecrets = 13;
+    repeated k8s.io.api.core.v1.Secret secrets = 13;
+    repeated k8s.io.api.core.v1.ConfigMap configMaps = 14;
 }
 
 message PodDeleteRequest  {
@@ -108,6 +84,12 @@ message PodResponse  {
 message Pods {
     NetworkInfo network = 1;
     optional k8s.io.api.core.v1.Pod pod = 2;
+}
+
+message PodInfoRequest  {
+    string namespace = 1;
+    string name = 2;
+    string vnode_id = 3;
 }
 
 message PodInfoResponse  {
