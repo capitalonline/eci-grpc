@@ -114,12 +114,16 @@ message PrivateNet {
     string eip = 5;
 }
 
-message ProductQuantity {
+message QuantityInfo {
     int64 cpu = 1;
     int64 ram = 2;
     int64 gpu = 3;
     string cpu_type = 4;
     string gpu_type = 5;
+}
+
+message ProductQuantity {
+    repeated QuantityInfo quantity = 1;
 }
 
 message NodeQuantity {
