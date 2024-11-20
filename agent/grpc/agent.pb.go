@@ -965,10 +965,6 @@ func (x *PrivateNet) GetEip() string {
 }
 
 type ProductQuantity struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
 	Cpu     int64  `protobuf:"varint,1,opt,name=cpu,proto3" json:"cpu,omitempty"`
 	Ram     int64  `protobuf:"varint,2,opt,name=ram,proto3" json:"ram,omitempty"`
 	Gpu     int64  `protobuf:"varint,3,opt,name=gpu,proto3" json:"gpu,omitempty"`
@@ -1042,10 +1038,6 @@ func (x *ProductQuantity) GetGpuType() string {
 }
 
 type NodeQuantity struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
 	Cpu int64 `protobuf:"varint,1,opt,name=cpu,proto3" json:"cpu,omitempty"`
 	Ram int64 `protobuf:"varint,2,opt,name=ram,proto3" json:"ram,omitempty"`
 	Gpu int64 `protobuf:"varint,3,opt,name=gpu,proto3" json:"gpu,omitempty"`
