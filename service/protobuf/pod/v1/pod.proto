@@ -18,7 +18,8 @@ message EciPod {
   string CustomerId = 1;
   string UserId = 2;
   string VNodeId = 3;
-  Pod Pod = 4;
+  string containerGroupName = 4;
+  Pod Pod = 5;
 }
 
 message Pod {
