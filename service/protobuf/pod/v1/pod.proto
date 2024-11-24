@@ -23,8 +23,8 @@ message EciPod {
 }
 
 message Pod {
-  string Name = 1;
-  string Id = 2;
+  string Id = 1;
+  string UID = 2;
   string Status = 3;
   NetworkInfo network = 4;
   int32 Cpu = 5;
@@ -35,7 +35,6 @@ message Pod {
   bool Boot = 10;
   string RestartPolicy = 11;
 }
-
 
 message NetworkInfo {
   string Ip = 1;
