@@ -34,12 +34,24 @@ message Pod {
   string GpuType = 9;
   bool Boot = 10;
   string RestartPolicy = 11;
+  string FamilyId = 12;
+  repeated Container  Containers = 13;
 }
 
 message NetworkInfo {
   string Ip = 1;
   string Vlan = 2;
   string Gateway = 3;
+}
+
+message Container {
+  string Name = 1;
+  string Image = 2;
+  string Status = 3;
+  int32 Restart = 4;
+  int32 Cpu = 5;
+  int32 Ram = 6;
+  int32 Gpu = 7;
 }
 
 message SavePodResp {
