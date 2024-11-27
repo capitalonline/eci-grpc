@@ -140,6 +140,7 @@ message NodeRequest  {
     map<string, string> labels  = 8;
     map<string, ProductQuantity> productQuantity = 9;
     NodeQuantity nodeQuantity = 10;
+    string image = 11;
 }
 
 message NodeResponse  {
