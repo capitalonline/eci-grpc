@@ -68,8 +68,9 @@ message PodRequest  {
 }
 
 message PodDeleteRequest  {
-    string name = 1;
-    string namespace = 2;
+    string vNodeID = 1;
+    string name = 2;
+    string namespace = 3;
 }
 
 message PodResponse  {
