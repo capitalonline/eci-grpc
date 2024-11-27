@@ -25,17 +25,19 @@ message EciPod {
 message Pod {
   string Id = 1;
   string UID = 2;
-  string Status = 3;
-  NetworkInfo network = 4;
-  int32 Cpu = 5;
-  int32 Ram = 6;
-  int32 Gpu = 7;
-  string CpuType = 8;
-  string GpuType = 9;
-  bool Boot = 10;
-  string RestartPolicy = 11;
-  string FamilyId = 12;
-  repeated Container  Containers = 13;
+  string name = 3;
+  string namespace = 4;
+  string Status = 5;
+  NetworkInfo network = 6;
+  int32 Cpu = 7;
+  int32 Ram = 8;
+  int32 Gpu = 9;
+  string CpuType = 10;
+  string GpuType = 11;
+  bool Boot = 12;
+  string RestartPolicy = 13;
+  string FamilyId = 14;
+  repeated Container Containers = 15;
 }
 
 message NetworkInfo {

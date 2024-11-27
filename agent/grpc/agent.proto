@@ -68,12 +68,8 @@ message PodRequest  {
 }
 
 message PodDeleteRequest  {
-    string customer_id = 1;
-    string user_id = 2;
-    string id = 3;
-    string vnode_id = 4;
-    string name = 5;
-    string namespace = 6;
+    string name = 1;
+    string namespace = 2;
 }
 
 message PodResponse  {
