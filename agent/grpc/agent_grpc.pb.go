@@ -19,15 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Agent_CreatePod_FullMethodName    = "/agent.Agent/CreatePod"
-	Agent_UpdatePod_FullMethodName    = "/agent.Agent/UpdatePod"
-	Agent_DeletePod_FullMethodName    = "/agent.Agent/DeletePod"
-	Agent_GetPod_FullMethodName       = "/agent.Agent/GetPod"
-	Agent_GetPods_FullMethodName      = "/agent.Agent/GetPods"
-	Agent_GetPodStatus_FullMethodName = "/agent.Agent/GetPodStatus"
-	Agent_CreateNode_FullMethodName   = "/agent.Agent/CreateNode"
-	Agent_UpdateNode_FullMethodName   = "/agent.Agent/UpdateNode"
-	Agent_DeleteNode_FullMethodName   = "/agent.Agent/DeleteNode"
+	Agent_CreatePod_FullMethodName       = "/agent.Agent/CreatePod"
+	Agent_UpdatePod_FullMethodName       = "/agent.Agent/UpdatePod"
+	Agent_DeletePod_FullMethodName       = "/agent.Agent/DeletePod"
+	Agent_GetPod_FullMethodName          = "/agent.Agent/GetPod"
+	Agent_GetPods_FullMethodName         = "/agent.Agent/GetPods"
+	Agent_GetPodStatus_FullMethodName    = "/agent.Agent/GetPodStatus"
+	Agent_CreateNode_FullMethodName      = "/agent.Agent/CreateNode"
+	Agent_UpdateNode_FullMethodName      = "/agent.Agent/UpdateNode"
+	Agent_DeleteNode_FullMethodName      = "/agent.Agent/DeleteNode"
+	Agent_GetNodeGpuUsage_FullMethodName = "/agent.Agent/GetNodeGpuUsage"
 )
 
 // AgentClient is the client API for Agent service.
@@ -43,6 +44,7 @@ type AgentClient interface {
 	CreateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	UpdateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	DeleteNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
+	GetNodeGpuUsage(ctx context.Context, in *NodeGpuUsageRequest, opts ...grpc.CallOption) (*NodeGpuUsageResponse, error)
 }
 
 type agentClient struct {
@@ -143,6 +145,16 @@ func (c *agentClient) DeleteNode(ctx context.Context, in *NodeRequest, opts ...g
 	return out, nil
 }
 
+func (c *agentClient) GetNodeGpuUsage(ctx context.Context, in *NodeGpuUsageRequest, opts ...grpc.CallOption) (*NodeGpuUsageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NodeGpuUsageResponse)
+	err := c.cc.Invoke(ctx, Agent_GetNodeGpuUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServer is the server API for Agent service.
 // All implementations must embed UnimplementedAgentServer
 // for forward compatibility.
@@ -156,6 +168,7 @@ type AgentServer interface {
 	CreateNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	UpdateNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	DeleteNode(context.Context, *NodeRequest) (*NodeResponse, error)
+	GetNodeGpuUsage(context.Context, *NodeGpuUsageRequest) (*NodeGpuUsageResponse, error)
 	mustEmbedUnimplementedAgentServer()
 }
 
@@ -192,6 +205,9 @@ func (UnimplementedAgentServer) UpdateNode(context.Context, *NodeRequest) (*Node
 }
 func (UnimplementedAgentServer) DeleteNode(context.Context, *NodeRequest) (*NodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteNode not implemented")
+}
+func (UnimplementedAgentServer) GetNodeGpuUsage(context.Context, *NodeGpuUsageRequest) (*NodeGpuUsageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNodeGpuUsage not implemented")
 }
 func (UnimplementedAgentServer) mustEmbedUnimplementedAgentServer() {}
 func (UnimplementedAgentServer) testEmbeddedByValue()               {}
@@ -376,6 +392,24 @@ func _Agent_DeleteNode_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Agent_GetNodeGpuUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodeGpuUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetNodeGpuUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetNodeGpuUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetNodeGpuUsage(ctx, req.(*NodeGpuUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Agent_ServiceDesc is the grpc.ServiceDesc for Agent service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -418,6 +452,10 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteNode",
 			Handler:    _Agent_DeleteNode_Handler,
+		},
+		{
+			MethodName: "GetNodeGpuUsage",
+			Handler:    _Agent_GetNodeGpuUsage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

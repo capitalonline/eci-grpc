@@ -16,6 +16,7 @@ service Agent {
     rpc CreateNode (NodeRequest) returns (NodeResponse) {}
     rpc UpdateNode (NodeRequest) returns (NodeResponse) {}
     rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
+    rpc GetNodeGpuUsage(NodeGpuUsageRequest) returns (NodeGpuUsageResponse) {}
 }
 
 enum ActionCode {
@@ -148,3 +149,20 @@ message NodeResponse  {
     string  message   = 2;
 }
 
+message NodeGpuUsageRequest{
+    repeated string host_id_list=1;
+}
+
+message NodeGpuUsageResponse{
+    ActionCode code   = 1;
+    string  message   = 2;
+    repeated NodeGpuUsage node_gpu_usage=3;
+}
+
+message NodeGpuUsage{
+    string host_id=1;
+    string gpu_type=2;
+    int32 total_gpu=3;
+    int32 used_gpu=4;
+    repeated string pod_id_list=5;
+}
