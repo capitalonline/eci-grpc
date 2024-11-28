@@ -32,12 +32,13 @@ message Pod {
   int32 Cpu = 7;
   int32 Ram = 8;
   int32 Gpu = 9;
-  string CpuType = 10;
-  string GpuType = 11;
-  bool Boot = 12;
-  string RestartPolicy = 13;
-  string FamilyId = 14;
-  repeated Container Containers = 15;
+  int32  ephemeralStorage = 10;
+  string CpuType = 11;
+  string GpuType = 12;
+  bool Boot = 13;
+  string RestartPolicy = 14;
+  string FamilyId = 15;
+  repeated Container Containers = 16;
 }
 
 message NetworkInfo {
