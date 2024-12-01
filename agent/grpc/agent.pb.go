@@ -558,6 +558,67 @@ func (x *PodDeleteRequest) GetNamespace() string {
 	return ""
 }
 
+type PodRebootRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	VNodeID   string `protobuf:"bytes,1,opt,name=vNodeID,proto3" json:"vNodeID,omitempty"`
+	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Namespace string `protobuf:"bytes,3,opt,name=namespace,proto3" json:"namespace,omitempty"`
+}
+
+func (x *PodRebootRequest) Reset() {
+	*x = PodRebootRequest{}
+	mi := &file_agent_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PodRebootRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PodRebootRequest) ProtoMessage() {}
+
+func (x *PodRebootRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PodRebootRequest.ProtoReflect.Descriptor instead.
+func (*PodRebootRequest) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *PodRebootRequest) GetVNodeID() string {
+	if x != nil {
+		return x.VNodeID
+	}
+	return ""
+}
+
+func (x *PodRebootRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *PodRebootRequest) GetNamespace() string {
+	if x != nil {
+		return x.Namespace
+	}
+	return ""
+}
+
 type PodResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -569,7 +630,7 @@ type PodResponse struct {
 
 func (x *PodResponse) Reset() {
 	*x = PodResponse{}
-	mi := &file_agent_proto_msgTypes[7]
+	mi := &file_agent_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -581,7 +642,7 @@ func (x *PodResponse) String() string {
 func (*PodResponse) ProtoMessage() {}
 
 func (x *PodResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[7]
+	mi := &file_agent_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -594,7 +655,7 @@ func (x *PodResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PodResponse.ProtoReflect.Descriptor instead.
 func (*PodResponse) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{7}
+	return file_agent_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *PodResponse) GetCode() ActionCode {
@@ -622,7 +683,7 @@ type Pods struct {
 
 func (x *Pods) Reset() {
 	*x = Pods{}
-	mi := &file_agent_proto_msgTypes[8]
+	mi := &file_agent_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +695,7 @@ func (x *Pods) String() string {
 func (*Pods) ProtoMessage() {}
 
 func (x *Pods) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[8]
+	mi := &file_agent_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -647,7 +708,7 @@ func (x *Pods) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Pods.ProtoReflect.Descriptor instead.
 func (*Pods) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{8}
+	return file_agent_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *Pods) GetNetwork() *NetworkInfo {
@@ -676,7 +737,7 @@ type PodInfoRequest struct {
 
 func (x *PodInfoRequest) Reset() {
 	*x = PodInfoRequest{}
-	mi := &file_agent_proto_msgTypes[9]
+	mi := &file_agent_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -688,7 +749,7 @@ func (x *PodInfoRequest) String() string {
 func (*PodInfoRequest) ProtoMessage() {}
 
 func (x *PodInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[9]
+	mi := &file_agent_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -701,7 +762,7 @@ func (x *PodInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PodInfoRequest.ProtoReflect.Descriptor instead.
 func (*PodInfoRequest) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{9}
+	return file_agent_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *PodInfoRequest) GetNamespace() string {
@@ -737,7 +798,7 @@ type PodInfoResponse struct {
 
 func (x *PodInfoResponse) Reset() {
 	*x = PodInfoResponse{}
-	mi := &file_agent_proto_msgTypes[10]
+	mi := &file_agent_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -749,7 +810,7 @@ func (x *PodInfoResponse) String() string {
 func (*PodInfoResponse) ProtoMessage() {}
 
 func (x *PodInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[10]
+	mi := &file_agent_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +823,7 @@ func (x *PodInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PodInfoResponse.ProtoReflect.Descriptor instead.
 func (*PodInfoResponse) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{10}
+	return file_agent_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *PodInfoResponse) GetCode() ActionCode {
@@ -800,7 +861,7 @@ type IpPoolSegments struct {
 
 func (x *IpPoolSegments) Reset() {
 	*x = IpPoolSegments{}
-	mi := &file_agent_proto_msgTypes[11]
+	mi := &file_agent_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -812,7 +873,7 @@ func (x *IpPoolSegments) String() string {
 func (*IpPoolSegments) ProtoMessage() {}
 
 func (x *IpPoolSegments) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[11]
+	mi := &file_agent_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -825,7 +886,7 @@ func (x *IpPoolSegments) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IpPoolSegments.ProtoReflect.Descriptor instead.
 func (*IpPoolSegments) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{11}
+	return file_agent_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *IpPoolSegments) GetVlan() string {
@@ -877,7 +938,7 @@ type PrivateNet struct {
 
 func (x *PrivateNet) Reset() {
 	*x = PrivateNet{}
-	mi := &file_agent_proto_msgTypes[12]
+	mi := &file_agent_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -889,7 +950,7 @@ func (x *PrivateNet) String() string {
 func (*PrivateNet) ProtoMessage() {}
 
 func (x *PrivateNet) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[12]
+	mi := &file_agent_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -902,7 +963,7 @@ func (x *PrivateNet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PrivateNet.ProtoReflect.Descriptor instead.
 func (*PrivateNet) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{12}
+	return file_agent_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *PrivateNet) GetVlan() string {
@@ -954,7 +1015,7 @@ type QuantityInfo struct {
 
 func (x *QuantityInfo) Reset() {
 	*x = QuantityInfo{}
-	mi := &file_agent_proto_msgTypes[13]
+	mi := &file_agent_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -966,7 +1027,7 @@ func (x *QuantityInfo) String() string {
 func (*QuantityInfo) ProtoMessage() {}
 
 func (x *QuantityInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[13]
+	mi := &file_agent_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -979,7 +1040,7 @@ func (x *QuantityInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuantityInfo.ProtoReflect.Descriptor instead.
 func (*QuantityInfo) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{13}
+	return file_agent_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *QuantityInfo) GetCpu() int64 {
@@ -1027,7 +1088,7 @@ type ProductQuantity struct {
 
 func (x *ProductQuantity) Reset() {
 	*x = ProductQuantity{}
-	mi := &file_agent_proto_msgTypes[14]
+	mi := &file_agent_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1039,7 +1100,7 @@ func (x *ProductQuantity) String() string {
 func (*ProductQuantity) ProtoMessage() {}
 
 func (x *ProductQuantity) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[14]
+	mi := &file_agent_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1052,7 +1113,7 @@ func (x *ProductQuantity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductQuantity.ProtoReflect.Descriptor instead.
 func (*ProductQuantity) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{14}
+	return file_agent_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ProductQuantity) GetQuantity() []*QuantityInfo {
@@ -1074,7 +1135,7 @@ type NodeQuantity struct {
 
 func (x *NodeQuantity) Reset() {
 	*x = NodeQuantity{}
-	mi := &file_agent_proto_msgTypes[15]
+	mi := &file_agent_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1086,7 +1147,7 @@ func (x *NodeQuantity) String() string {
 func (*NodeQuantity) ProtoMessage() {}
 
 func (x *NodeQuantity) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[15]
+	mi := &file_agent_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1099,7 +1160,7 @@ func (x *NodeQuantity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeQuantity.ProtoReflect.Descriptor instead.
 func (*NodeQuantity) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{15}
+	return file_agent_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *NodeQuantity) GetCpu() int64 {
@@ -1143,7 +1204,7 @@ type NodeRequest struct {
 
 func (x *NodeRequest) Reset() {
 	*x = NodeRequest{}
-	mi := &file_agent_proto_msgTypes[16]
+	mi := &file_agent_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1155,7 +1216,7 @@ func (x *NodeRequest) String() string {
 func (*NodeRequest) ProtoMessage() {}
 
 func (x *NodeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[16]
+	mi := &file_agent_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1168,7 +1229,7 @@ func (x *NodeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeRequest.ProtoReflect.Descriptor instead.
 func (*NodeRequest) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{16}
+	return file_agent_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *NodeRequest) GetKubeConfig() string {
@@ -1259,7 +1320,7 @@ type NodeResponse struct {
 
 func (x *NodeResponse) Reset() {
 	*x = NodeResponse{}
-	mi := &file_agent_proto_msgTypes[17]
+	mi := &file_agent_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1271,7 +1332,7 @@ func (x *NodeResponse) String() string {
 func (*NodeResponse) ProtoMessage() {}
 
 func (x *NodeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[17]
+	mi := &file_agent_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1284,7 +1345,7 @@ func (x *NodeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeResponse.ProtoReflect.Descriptor instead.
 func (*NodeResponse) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{17}
+	return file_agent_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *NodeResponse) GetCode() ActionCode {
@@ -1311,7 +1372,7 @@ type NodeGpuUsageRequest struct {
 
 func (x *NodeGpuUsageRequest) Reset() {
 	*x = NodeGpuUsageRequest{}
-	mi := &file_agent_proto_msgTypes[18]
+	mi := &file_agent_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1323,7 +1384,7 @@ func (x *NodeGpuUsageRequest) String() string {
 func (*NodeGpuUsageRequest) ProtoMessage() {}
 
 func (x *NodeGpuUsageRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[18]
+	mi := &file_agent_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1336,7 +1397,7 @@ func (x *NodeGpuUsageRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeGpuUsageRequest.ProtoReflect.Descriptor instead.
 func (*NodeGpuUsageRequest) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{18}
+	return file_agent_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *NodeGpuUsageRequest) GetHostIdList() []string {
@@ -1358,7 +1419,7 @@ type NodeGpuUsageResponse struct {
 
 func (x *NodeGpuUsageResponse) Reset() {
 	*x = NodeGpuUsageResponse{}
-	mi := &file_agent_proto_msgTypes[19]
+	mi := &file_agent_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1370,7 +1431,7 @@ func (x *NodeGpuUsageResponse) String() string {
 func (*NodeGpuUsageResponse) ProtoMessage() {}
 
 func (x *NodeGpuUsageResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[19]
+	mi := &file_agent_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1383,7 +1444,7 @@ func (x *NodeGpuUsageResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeGpuUsageResponse.ProtoReflect.Descriptor instead.
 func (*NodeGpuUsageResponse) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{19}
+	return file_agent_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *NodeGpuUsageResponse) GetCode() ActionCode {
@@ -1421,7 +1482,7 @@ type NodeGpuUsage struct {
 
 func (x *NodeGpuUsage) Reset() {
 	*x = NodeGpuUsage{}
-	mi := &file_agent_proto_msgTypes[20]
+	mi := &file_agent_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1433,7 +1494,7 @@ func (x *NodeGpuUsage) String() string {
 func (*NodeGpuUsage) ProtoMessage() {}
 
 func (x *NodeGpuUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[20]
+	mi := &file_agent_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1446,7 +1507,7 @@ func (x *NodeGpuUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeGpuUsage.ProtoReflect.Descriptor instead.
 func (*NodeGpuUsage) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{20}
+	return file_agent_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *NodeGpuUsage) GetHostId() string {
@@ -1559,6 +1620,12 @@ var file_agent_proto_rawDesc = []byte{
 	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x6f, 0x6e,
 	0x66, 0x69, 0x67, 0x4d, 0x61, 0x70, 0x52, 0x0a, 0x63, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x4d, 0x61,
 	0x70, 0x73, 0x22, 0x5e, 0x0a, 0x10, 0x50, 0x6f, 0x64, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x4e, 0x6f, 0x64, 0x65, 0x49,
+	0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x4e, 0x6f, 0x64, 0x65, 0x49, 0x44,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x70, 0x61,
+	0x63, 0x65, 0x22, 0x5e, 0x0a, 0x10, 0x50, 0x6f, 0x64, 0x52, 0x65, 0x62, 0x6f, 0x6f, 0x74, 0x52,
 	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x4e, 0x6f, 0x64, 0x65, 0x49,
 	0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x4e, 0x6f, 0x64, 0x65, 0x49, 0x44,
 	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
@@ -1702,7 +1769,7 @@ var file_agent_proto_rawDesc = []byte{
 	0x0a, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x53,
 	0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x43, 0x6f, 0x64, 0x65, 0x10, 0x00, 0x12, 0x15, 0x0a, 0x08,
 	0x46, 0x61, 0x69, 0x6c, 0x43, 0x6f, 0x64, 0x65, 0x10, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-	0xff, 0xff, 0x01, 0x32, 0xe0, 0x04, 0x0a, 0x05, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x34, 0x0a,
+	0xff, 0xff, 0x01, 0x32, 0x9c, 0x05, 0x0a, 0x05, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x12, 0x34, 0x0a,
 	0x09, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x6f, 0x64, 0x12, 0x11, 0x2e, 0x61, 0x67, 0x65,
 	0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e,
 	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
@@ -1713,35 +1780,39 @@ var file_agent_proto_rawDesc = []byte{
 	0x65, 0x74, 0x65, 0x50, 0x6f, 0x64, 0x12, 0x17, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50,
 	0x6f, 0x64, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
 	0x12, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x39, 0x0a, 0x06, 0x47, 0x65, 0x74, 0x50, 0x6f, 0x64, 0x12,
-	0x15, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50,
-	0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x12, 0x3a, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x50, 0x6f, 0x64, 0x73, 0x12, 0x15, 0x2e, 0x61, 0x67,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3a, 0x0a, 0x09, 0x52, 0x65, 0x62, 0x6f, 0x6f, 0x74, 0x50,
+	0x6f, 0x64, 0x12, 0x17, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x52, 0x65,
+	0x62, 0x6f, 0x6f, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x61, 0x67,
+	0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x12, 0x39, 0x0a, 0x06, 0x47, 0x65, 0x74, 0x50, 0x6f, 0x64, 0x12, 0x15, 0x2e, 0x61, 0x67,
 	0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e,
-	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3f, 0x0a, 0x0c,
-	0x47, 0x65, 0x74, 0x50, 0x6f, 0x64, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x15, 0x2e, 0x61,
-	0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49,
-	0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x37, 0x0a,
-	0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x2e, 0x61, 0x67,
-	0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x13, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x37, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x4e, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64,
-	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74,
-	0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
-	0x37, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x2e,
-	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x13, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4c, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x4e,
-	0x6f, 0x64, 0x65, 0x47, 0x70, 0x75, 0x55, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x2e, 0x61, 0x67,
-	0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x47, 0x70, 0x75, 0x55, 0x73, 0x61, 0x67, 0x65,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
-	0x4e, 0x6f, 0x64, 0x65, 0x47, 0x70, 0x75, 0x55, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x61, 0x67, 0x65, 0x6e,
-	0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3a, 0x0a, 0x07,
+	0x47, 0x65, 0x74, 0x50, 0x6f, 0x64, 0x73, 0x12, 0x15, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
+	0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16,
+	0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3f, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x50,
+	0x6f, 0x64, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x15, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74,
+	0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x16, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6f, 0x64, 0x49, 0x6e, 0x66, 0x6f, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x37, 0x0a, 0x0a, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
+	0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x61, 0x67,
+	0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x37, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x64, 0x65,
+	0x12, 0x12, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64,
+	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x37, 0x0a, 0x0a, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x4e, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x2e, 0x61, 0x67, 0x65, 0x6e,
+	0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x13, 0x2e,
+	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x12, 0x4c, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x4e, 0x6f, 0x64, 0x65, 0x47,
+	0x70, 0x75, 0x55, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1a, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e,
+	0x4e, 0x6f, 0x64, 0x65, 0x47, 0x70, 0x75, 0x55, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x4e, 0x6f, 0x64, 0x65,
+	0x47, 0x70, 0x75, 0x55, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x42, 0x09, 0x5a, 0x07, 0x2e, 0x2f, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1757,7 +1828,7 @@ func file_agent_proto_rawDescGZIP() []byte {
 }
 
 var file_agent_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_agent_proto_goTypes = []any{
 	(ActionCode)(0),                  // 0: agent.ActionCode
 	(*NetworkInfo)(nil),              // 1: agent.NetworkInfo
@@ -1767,79 +1838,82 @@ var file_agent_proto_goTypes = []any{
 	(*Pod)(nil),                      // 5: agent.Pod
 	(*PodRequest)(nil),               // 6: agent.PodRequest
 	(*PodDeleteRequest)(nil),         // 7: agent.PodDeleteRequest
-	(*PodResponse)(nil),              // 8: agent.PodResponse
-	(*Pods)(nil),                     // 9: agent.Pods
-	(*PodInfoRequest)(nil),           // 10: agent.PodInfoRequest
-	(*PodInfoResponse)(nil),          // 11: agent.PodInfoResponse
-	(*IpPoolSegments)(nil),           // 12: agent.IpPoolSegments
-	(*PrivateNet)(nil),               // 13: agent.PrivateNet
-	(*QuantityInfo)(nil),             // 14: agent.QuantityInfo
-	(*ProductQuantity)(nil),          // 15: agent.ProductQuantity
-	(*NodeQuantity)(nil),             // 16: agent.NodeQuantity
-	(*NodeRequest)(nil),              // 17: agent.NodeRequest
-	(*NodeResponse)(nil),             // 18: agent.NodeResponse
-	(*NodeGpuUsageRequest)(nil),      // 19: agent.NodeGpuUsageRequest
-	(*NodeGpuUsageResponse)(nil),     // 20: agent.NodeGpuUsageResponse
-	(*NodeGpuUsage)(nil),             // 21: agent.NodeGpuUsage
-	nil,                              // 22: agent.NodeRequest.IpPoolSegmentsEntry
-	nil,                              // 23: agent.NodeRequest.LabelsEntry
-	nil,                              // 24: agent.NodeRequest.ProductQuantityEntry
-	(*v1.ConfigMap)(nil),             // 25: k8s.io.api.core.v1.ConfigMap
-	(*v1.ConfigMapVolumeSource)(nil), // 26: k8s.io.api.core.v1.ConfigMapVolumeSource
-	(*v1.Secret)(nil),                // 27: k8s.io.api.core.v1.Secret
-	(*v1.SecretVolumeSource)(nil),    // 28: k8s.io.api.core.v1.SecretVolumeSource
-	(*v1.Pod)(nil),                   // 29: k8s.io.api.core.v1.Pod
-	(*v1.Taint)(nil),                 // 30: k8s.io.api.core.v1.Taint
+	(*PodRebootRequest)(nil),         // 8: agent.PodRebootRequest
+	(*PodResponse)(nil),              // 9: agent.PodResponse
+	(*Pods)(nil),                     // 10: agent.Pods
+	(*PodInfoRequest)(nil),           // 11: agent.PodInfoRequest
+	(*PodInfoResponse)(nil),          // 12: agent.PodInfoResponse
+	(*IpPoolSegments)(nil),           // 13: agent.IpPoolSegments
+	(*PrivateNet)(nil),               // 14: agent.PrivateNet
+	(*QuantityInfo)(nil),             // 15: agent.QuantityInfo
+	(*ProductQuantity)(nil),          // 16: agent.ProductQuantity
+	(*NodeQuantity)(nil),             // 17: agent.NodeQuantity
+	(*NodeRequest)(nil),              // 18: agent.NodeRequest
+	(*NodeResponse)(nil),             // 19: agent.NodeResponse
+	(*NodeGpuUsageRequest)(nil),      // 20: agent.NodeGpuUsageRequest
+	(*NodeGpuUsageResponse)(nil),     // 21: agent.NodeGpuUsageResponse
+	(*NodeGpuUsage)(nil),             // 22: agent.NodeGpuUsage
+	nil,                              // 23: agent.NodeRequest.IpPoolSegmentsEntry
+	nil,                              // 24: agent.NodeRequest.LabelsEntry
+	nil,                              // 25: agent.NodeRequest.ProductQuantityEntry
+	(*v1.ConfigMap)(nil),             // 26: k8s.io.api.core.v1.ConfigMap
+	(*v1.ConfigMapVolumeSource)(nil), // 27: k8s.io.api.core.v1.ConfigMapVolumeSource
+	(*v1.Secret)(nil),                // 28: k8s.io.api.core.v1.Secret
+	(*v1.SecretVolumeSource)(nil),    // 29: k8s.io.api.core.v1.SecretVolumeSource
+	(*v1.Pod)(nil),                   // 30: k8s.io.api.core.v1.Pod
+	(*v1.Taint)(nil),                 // 31: k8s.io.api.core.v1.Taint
 }
 var file_agent_proto_depIdxs = []int32{
-	25, // 0: agent.ConfigMapVolume.source:type_name -> k8s.io.api.core.v1.ConfigMap
-	26, // 1: agent.ConfigMapVolume.volume:type_name -> k8s.io.api.core.v1.ConfigMapVolumeSource
-	27, // 2: agent.SecretVolume.source:type_name -> k8s.io.api.core.v1.Secret
-	28, // 3: agent.SecretVolume.volume:type_name -> k8s.io.api.core.v1.SecretVolumeSource
+	26, // 0: agent.ConfigMapVolume.source:type_name -> k8s.io.api.core.v1.ConfigMap
+	27, // 1: agent.ConfigMapVolume.volume:type_name -> k8s.io.api.core.v1.ConfigMapVolumeSource
+	28, // 2: agent.SecretVolume.source:type_name -> k8s.io.api.core.v1.Secret
+	29, // 3: agent.SecretVolume.volume:type_name -> k8s.io.api.core.v1.SecretVolumeSource
 	1,  // 4: agent.Pod.network:type_name -> agent.NetworkInfo
-	29, // 5: agent.Pod.rawPod:type_name -> k8s.io.api.core.v1.Pod
+	30, // 5: agent.Pod.rawPod:type_name -> k8s.io.api.core.v1.Pod
 	5,  // 6: agent.PodRequest.pods:type_name -> agent.Pod
-	27, // 7: agent.PodRequest.secrets:type_name -> k8s.io.api.core.v1.Secret
-	25, // 8: agent.PodRequest.configMaps:type_name -> k8s.io.api.core.v1.ConfigMap
+	28, // 7: agent.PodRequest.secrets:type_name -> k8s.io.api.core.v1.Secret
+	26, // 8: agent.PodRequest.configMaps:type_name -> k8s.io.api.core.v1.ConfigMap
 	0,  // 9: agent.PodResponse.code:type_name -> agent.ActionCode
 	1,  // 10: agent.Pods.network:type_name -> agent.NetworkInfo
-	29, // 11: agent.Pods.pod:type_name -> k8s.io.api.core.v1.Pod
+	30, // 11: agent.Pods.pod:type_name -> k8s.io.api.core.v1.Pod
 	0,  // 12: agent.PodInfoResponse.code:type_name -> agent.ActionCode
-	9,  // 13: agent.PodInfoResponse.pods:type_name -> agent.Pods
-	14, // 14: agent.ProductQuantity.quantity:type_name -> agent.QuantityInfo
-	22, // 15: agent.NodeRequest.ip_pool_segments:type_name -> agent.NodeRequest.IpPoolSegmentsEntry
-	13, // 16: agent.NodeRequest.private_net:type_name -> agent.PrivateNet
-	30, // 17: agent.NodeRequest.Taints:type_name -> k8s.io.api.core.v1.Taint
-	23, // 18: agent.NodeRequest.labels:type_name -> agent.NodeRequest.LabelsEntry
-	24, // 19: agent.NodeRequest.productQuantity:type_name -> agent.NodeRequest.ProductQuantityEntry
-	16, // 20: agent.NodeRequest.nodeQuantity:type_name -> agent.NodeQuantity
+	10, // 13: agent.PodInfoResponse.pods:type_name -> agent.Pods
+	15, // 14: agent.ProductQuantity.quantity:type_name -> agent.QuantityInfo
+	23, // 15: agent.NodeRequest.ip_pool_segments:type_name -> agent.NodeRequest.IpPoolSegmentsEntry
+	14, // 16: agent.NodeRequest.private_net:type_name -> agent.PrivateNet
+	31, // 17: agent.NodeRequest.Taints:type_name -> k8s.io.api.core.v1.Taint
+	24, // 18: agent.NodeRequest.labels:type_name -> agent.NodeRequest.LabelsEntry
+	25, // 19: agent.NodeRequest.productQuantity:type_name -> agent.NodeRequest.ProductQuantityEntry
+	17, // 20: agent.NodeRequest.nodeQuantity:type_name -> agent.NodeQuantity
 	0,  // 21: agent.NodeResponse.code:type_name -> agent.ActionCode
 	0,  // 22: agent.NodeGpuUsageResponse.code:type_name -> agent.ActionCode
-	21, // 23: agent.NodeGpuUsageResponse.node_gpu_usage:type_name -> agent.NodeGpuUsage
-	12, // 24: agent.NodeRequest.IpPoolSegmentsEntry.value:type_name -> agent.IpPoolSegments
-	15, // 25: agent.NodeRequest.ProductQuantityEntry.value:type_name -> agent.ProductQuantity
+	22, // 23: agent.NodeGpuUsageResponse.node_gpu_usage:type_name -> agent.NodeGpuUsage
+	13, // 24: agent.NodeRequest.IpPoolSegmentsEntry.value:type_name -> agent.IpPoolSegments
+	16, // 25: agent.NodeRequest.ProductQuantityEntry.value:type_name -> agent.ProductQuantity
 	6,  // 26: agent.Agent.CreatePod:input_type -> agent.PodRequest
 	6,  // 27: agent.Agent.UpdatePod:input_type -> agent.PodRequest
 	7,  // 28: agent.Agent.DeletePod:input_type -> agent.PodDeleteRequest
-	10, // 29: agent.Agent.GetPod:input_type -> agent.PodInfoRequest
-	10, // 30: agent.Agent.GetPods:input_type -> agent.PodInfoRequest
-	10, // 31: agent.Agent.GetPodStatus:input_type -> agent.PodInfoRequest
-	17, // 32: agent.Agent.CreateNode:input_type -> agent.NodeRequest
-	17, // 33: agent.Agent.UpdateNode:input_type -> agent.NodeRequest
-	17, // 34: agent.Agent.DeleteNode:input_type -> agent.NodeRequest
-	19, // 35: agent.Agent.GetNodeGpuUsage:input_type -> agent.NodeGpuUsageRequest
-	8,  // 36: agent.Agent.CreatePod:output_type -> agent.PodResponse
-	8,  // 37: agent.Agent.UpdatePod:output_type -> agent.PodResponse
-	8,  // 38: agent.Agent.DeletePod:output_type -> agent.PodResponse
-	11, // 39: agent.Agent.GetPod:output_type -> agent.PodInfoResponse
-	11, // 40: agent.Agent.GetPods:output_type -> agent.PodInfoResponse
-	11, // 41: agent.Agent.GetPodStatus:output_type -> agent.PodInfoResponse
-	18, // 42: agent.Agent.CreateNode:output_type -> agent.NodeResponse
-	18, // 43: agent.Agent.UpdateNode:output_type -> agent.NodeResponse
-	18, // 44: agent.Agent.DeleteNode:output_type -> agent.NodeResponse
-	20, // 45: agent.Agent.GetNodeGpuUsage:output_type -> agent.NodeGpuUsageResponse
-	36, // [36:46] is the sub-list for method output_type
-	26, // [26:36] is the sub-list for method input_type
+	8,  // 29: agent.Agent.RebootPod:input_type -> agent.PodRebootRequest
+	11, // 30: agent.Agent.GetPod:input_type -> agent.PodInfoRequest
+	11, // 31: agent.Agent.GetPods:input_type -> agent.PodInfoRequest
+	11, // 32: agent.Agent.GetPodStatus:input_type -> agent.PodInfoRequest
+	18, // 33: agent.Agent.CreateNode:input_type -> agent.NodeRequest
+	18, // 34: agent.Agent.UpdateNode:input_type -> agent.NodeRequest
+	18, // 35: agent.Agent.DeleteNode:input_type -> agent.NodeRequest
+	20, // 36: agent.Agent.GetNodeGpuUsage:input_type -> agent.NodeGpuUsageRequest
+	9,  // 37: agent.Agent.CreatePod:output_type -> agent.PodResponse
+	9,  // 38: agent.Agent.UpdatePod:output_type -> agent.PodResponse
+	9,  // 39: agent.Agent.DeletePod:output_type -> agent.PodResponse
+	9,  // 40: agent.Agent.RebootPod:output_type -> agent.PodResponse
+	12, // 41: agent.Agent.GetPod:output_type -> agent.PodInfoResponse
+	12, // 42: agent.Agent.GetPods:output_type -> agent.PodInfoResponse
+	12, // 43: agent.Agent.GetPodStatus:output_type -> agent.PodInfoResponse
+	19, // 44: agent.Agent.CreateNode:output_type -> agent.NodeResponse
+	19, // 45: agent.Agent.UpdateNode:output_type -> agent.NodeResponse
+	19, // 46: agent.Agent.DeleteNode:output_type -> agent.NodeResponse
+	21, // 47: agent.Agent.GetNodeGpuUsage:output_type -> agent.NodeGpuUsageResponse
+	37, // [37:48] is the sub-list for method output_type
+	26, // [26:37] is the sub-list for method input_type
 	26, // [26:26] is the sub-list for extension type_name
 	26, // [26:26] is the sub-list for extension extendee
 	0,  // [0:26] is the sub-list for field type_name
@@ -1853,14 +1927,14 @@ func file_agent_proto_init() {
 	file_agent_proto_msgTypes[2].OneofWrappers = []any{}
 	file_agent_proto_msgTypes[3].OneofWrappers = []any{}
 	file_agent_proto_msgTypes[4].OneofWrappers = []any{}
-	file_agent_proto_msgTypes[8].OneofWrappers = []any{}
+	file_agent_proto_msgTypes[9].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_agent_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

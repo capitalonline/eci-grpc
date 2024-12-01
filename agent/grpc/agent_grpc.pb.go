@@ -22,6 +22,7 @@ const (
 	Agent_CreatePod_FullMethodName       = "/agent.Agent/CreatePod"
 	Agent_UpdatePod_FullMethodName       = "/agent.Agent/UpdatePod"
 	Agent_DeletePod_FullMethodName       = "/agent.Agent/DeletePod"
+	Agent_RebootPod_FullMethodName       = "/agent.Agent/RebootPod"
 	Agent_GetPod_FullMethodName          = "/agent.Agent/GetPod"
 	Agent_GetPods_FullMethodName         = "/agent.Agent/GetPods"
 	Agent_GetPodStatus_FullMethodName    = "/agent.Agent/GetPodStatus"
@@ -38,6 +39,7 @@ type AgentClient interface {
 	CreatePod(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*PodResponse, error)
 	UpdatePod(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*PodResponse, error)
 	DeletePod(ctx context.Context, in *PodDeleteRequest, opts ...grpc.CallOption) (*PodResponse, error)
+	RebootPod(ctx context.Context, in *PodRebootRequest, opts ...grpc.CallOption) (*PodResponse, error)
 	GetPod(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	GetPods(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	GetPodStatus(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
@@ -79,6 +81,16 @@ func (c *agentClient) DeletePod(ctx context.Context, in *PodDeleteRequest, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PodResponse)
 	err := c.cc.Invoke(ctx, Agent_DeletePod_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentClient) RebootPod(ctx context.Context, in *PodRebootRequest, opts ...grpc.CallOption) (*PodResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PodResponse)
+	err := c.cc.Invoke(ctx, Agent_RebootPod_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,6 +174,7 @@ type AgentServer interface {
 	CreatePod(context.Context, *PodRequest) (*PodResponse, error)
 	UpdatePod(context.Context, *PodRequest) (*PodResponse, error)
 	DeletePod(context.Context, *PodDeleteRequest) (*PodResponse, error)
+	RebootPod(context.Context, *PodRebootRequest) (*PodResponse, error)
 	GetPod(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	GetPods(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
@@ -187,6 +200,9 @@ func (UnimplementedAgentServer) UpdatePod(context.Context, *PodRequest) (*PodRes
 }
 func (UnimplementedAgentServer) DeletePod(context.Context, *PodDeleteRequest) (*PodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePod not implemented")
+}
+func (UnimplementedAgentServer) RebootPod(context.Context, *PodRebootRequest) (*PodResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RebootPod not implemented")
 }
 func (UnimplementedAgentServer) GetPod(context.Context, *PodInfoRequest) (*PodInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPod not implemented")
@@ -280,6 +296,24 @@ func _Agent_DeletePod_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AgentServer).DeletePod(ctx, req.(*PodDeleteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Agent_RebootPod_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PodRebootRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).RebootPod(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_RebootPod_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).RebootPod(ctx, req.(*PodRebootRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -428,6 +462,10 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeletePod",
 			Handler:    _Agent_DeletePod_Handler,
+		},
+		{
+			MethodName: "RebootPod",
+			Handler:    _Agent_RebootPod_Handler,
 		},
 		{
 			MethodName: "GetPod",

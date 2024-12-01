@@ -10,6 +10,7 @@ service Agent {
     rpc CreatePod (PodRequest) returns (PodResponse) {}
     rpc UpdatePod (PodRequest) returns (PodResponse) {}
     rpc DeletePod (PodDeleteRequest) returns (PodResponse) {}
+    rpc RebootPod (PodRebootRequest) returns (PodResponse) {}
     rpc GetPod (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPods (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPodStatus (PodInfoRequest) returns (PodInfoResponse) {}
@@ -69,6 +70,12 @@ message PodRequest  {
 }
 
 message PodDeleteRequest  {
+    string vNodeID = 1;
+    string name = 2;
+    string namespace = 3;
+}
+
+message PodRebootRequest  {
     string vNodeID = 1;
     string name = 2;
     string namespace = 3;
