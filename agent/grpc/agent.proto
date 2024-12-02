@@ -158,7 +158,7 @@ message NodeResponse  {
 }
 
 message NodeGpuUsageRequest{
-    repeated string host_id_list=1;
+    repeated string nodeIds=1;
 }
 
 message NodeGpuUsageResponse{
@@ -168,11 +168,11 @@ message NodeGpuUsageResponse{
 }
 
 message NodeGpuUsage{
-    string host_id=1;
-    string gpu_type=2;
-    int32 total_gpu=3;
-    int32 used_gpu=4;
-    repeated string pod_id_list=5;
+    string nodeId=1;
+    string gpuType=2;
+    int64 totalGpus=3;
+    int64 usedGpus=4;
+    repeated string podIds=5;
 }
 
 message CreateWsTokenRequest{
