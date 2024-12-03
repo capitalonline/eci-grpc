@@ -14,6 +14,7 @@ service Agent {
     rpc GetPod (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPods (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPodStatus (PodInfoRequest) returns (PodInfoResponse) {}
+    rpc GetResourceQuota (QuotaRequest) returns (QuotaResponse) {}
     rpc CreateNode (NodeRequest) returns (NodeResponse) {}
     rpc UpdateNode (NodeRequest) returns (NodeResponse) {}
     rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
@@ -186,4 +187,13 @@ message CreateWsTokenResponse{
     ActionCode code = 1;
     string message = 2;
     string token = 3;
+}
+
+message QuotaRequest {
+    string customerId=1;
+    string userId=2;
+}
+
+message QuotaResponse {
+    map<string, int64> quota  = 1;
 }
