@@ -195,5 +195,5 @@ message QuotaRequest {
 }
 
 message QuotaResponse {
-    map<string, int64> quota  = 1;
+    optional k8s.io.api.core.v1.ResourceQuota quota = 1;
 }
