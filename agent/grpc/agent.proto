@@ -18,6 +18,7 @@ service Agent {
     rpc UpdateNode (NodeRequest) returns (NodeResponse) {}
     rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
     rpc GetNodeGpuUsage(NodeGpuUsageRequest) returns (NodeGpuUsageResponse) {}
+    rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
 }
 
 enum ActionCode {
@@ -172,4 +173,17 @@ message NodeGpuUsage{
     int32 total_gpu=3;
     int32 used_gpu=4;
     repeated string pod_id_list=5;
+}
+
+message CreateWsTokenRequest{
+    string customer_id=1;
+    string user_id=2;
+    string eci_id=3;
+}
+
+message CreateWsTokenResponse{
+    ActionCode code = 1;
+    string message = 2;
+    string host = 3;
+    string token = 4;
 }
