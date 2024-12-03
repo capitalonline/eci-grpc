@@ -179,6 +179,8 @@ message CreateWsTokenRequest{
     string customer_id=1;
     string user_id=2;
     string eci_id=3;
+    string pod_name=4;
+    string vnode_id=5;
 }
 
 message CreateWsTokenResponse{
