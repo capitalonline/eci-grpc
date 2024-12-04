@@ -200,4 +200,5 @@ message QuotaResponse {
 
 message CheckQuotaResponse {
     bool result = 1;
+    string message = 2;
 }
