@@ -34,6 +34,7 @@ const (
 	Agent_DeleteNode_FullMethodName         = "/agent.Agent/DeleteNode"
 	Agent_GetNodeGpuUsage_FullMethodName    = "/agent.Agent/GetNodeGpuUsage"
 	Agent_CreateWsToken_FullMethodName      = "/agent.Agent/CreateWsToken"
+	Agent_GetECIInstances_FullMethodName    = "/agent.Agent/GetECIInstances"
 )
 
 // AgentClient is the client API for Agent service.
@@ -55,6 +56,7 @@ type AgentClient interface {
 	DeleteNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	GetNodeGpuUsage(ctx context.Context, in *NodeGpuUsageRequest, opts ...grpc.CallOption) (*NodeGpuUsageResponse, error)
 	CreateWsToken(ctx context.Context, in *CreateWsTokenRequest, opts ...grpc.CallOption) (*CreateWsTokenResponse, error)
+	GetECIInstances(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*GetInstanceResponse, error)
 }
 
 type agentClient struct {
@@ -215,6 +217,16 @@ func (c *agentClient) CreateWsToken(ctx context.Context, in *CreateWsTokenReques
 	return out, nil
 }
 
+func (c *agentClient) GetECIInstances(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*GetInstanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInstanceResponse)
+	err := c.cc.Invoke(ctx, Agent_GetECIInstances_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServer is the server API for Agent service.
 // All implementations must embed UnimplementedAgentServer
 // for forward compatibility.
@@ -234,6 +246,7 @@ type AgentServer interface {
 	DeleteNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	GetNodeGpuUsage(context.Context, *NodeGpuUsageRequest) (*NodeGpuUsageResponse, error)
 	CreateWsToken(context.Context, *CreateWsTokenRequest) (*CreateWsTokenResponse, error)
+	GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error)
 	mustEmbedUnimplementedAgentServer()
 }
 
@@ -288,6 +301,9 @@ func (UnimplementedAgentServer) GetNodeGpuUsage(context.Context, *NodeGpuUsageRe
 }
 func (UnimplementedAgentServer) CreateWsToken(context.Context, *CreateWsTokenRequest) (*CreateWsTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWsToken not implemented")
+}
+func (UnimplementedAgentServer) GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetECIInstances not implemented")
 }
 func (UnimplementedAgentServer) mustEmbedUnimplementedAgentServer() {}
 func (UnimplementedAgentServer) testEmbeddedByValue()               {}
@@ -580,6 +596,24 @@ func _Agent_CreateWsToken_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Agent_GetECIInstances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInstanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetECIInstances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetECIInstances_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetECIInstances(ctx, req.(*GetInstanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Agent_ServiceDesc is the grpc.ServiceDesc for Agent service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -646,6 +680,10 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateWsToken",
 			Handler:    _Agent_CreateWsToken_Handler,
+		},
+		{
+			MethodName: "GetECIInstances",
+			Handler:    _Agent_GetECIInstances_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

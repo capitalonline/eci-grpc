@@ -22,6 +22,7 @@ service Agent {
     rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
     rpc GetNodeGpuUsage(NodeGpuUsageRequest) returns (NodeGpuUsageResponse) {}
     rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
+    rpc GetECIInstances(GetInstanceRequest) returns (GetInstanceResponse) {}
 }
 
 enum ActionCode {
@@ -208,4 +209,14 @@ message QuotaStatusResponse {
 message QuotaResponse {
     bool result = 1;
     string message = 2;
+}
+
+message GetInstanceRequest {
+    string customerId = 1;
+    string userId = 2;
+    repeated string InstanceIds=3;
+}
+
+message GetInstanceResponse {
+    repeated string InstanceIds=1;
 }
