@@ -14,8 +14,9 @@ service Agent {
     rpc GetPod (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPods (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPodStatus (PodInfoRequest) returns (PodInfoResponse) {}
-    rpc CheckResourceQuota (PodRequest) returns (CheckQuotaResponse) {}
-    rpc GetResourceQuota (QuotaRequest) returns (QuotaResponse) {}
+    rpc CheckResourceQuota (PodRequest) returns (QuotaResponse) {}
+    rpc GetResourceQuota (QuotaGetRequest) returns (QuotaStatusResponse) {}
+    rpc SetResourceQuota (QuotaSetRequest) returns (QuotaResponse) {}
     rpc CreateNode (NodeRequest) returns (NodeResponse) {}
     rpc UpdateNode (NodeRequest) returns (NodeResponse) {}
     rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
@@ -189,16 +190,22 @@ message CreateWsTokenResponse{
     string token = 3;
 }
 
-message QuotaRequest {
+message QuotaGetRequest {
     string customerId = 1;
     string userId = 2;
 }
 
-message QuotaResponse {
+message QuotaSetRequest {
+    string customerId = 1;
+    string userId = 2;
+    optional k8s.io.api.core.v1.ResourceQuotaSpec quota = 3;
+}
+
+message QuotaStatusResponse {
     optional k8s.io.api.core.v1.ResourceQuotaStatus quota = 1;
 }
 
-message CheckQuotaResponse {
+message QuotaResponse {
     bool result = 1;
     string message = 2;
 }
