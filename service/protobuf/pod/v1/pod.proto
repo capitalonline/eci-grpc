@@ -51,10 +51,12 @@ message Container {
   string Name = 1;
   string Image = 2;
   string Status = 3;
-  int32 Restart = 4;
-  int32 Cpu = 5;
-  int32 Ram = 6;
-  int32 Gpu = 7;
+  int32 exitCode = 4;
+  string reason = 5;
+  int32 Restart = 6;
+  int32 Cpu = 7;
+  int32 Ram = 8;
+  int32 Gpu = 9;
 }
 
 message SavePodResp {
