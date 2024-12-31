@@ -21,6 +21,7 @@ service Agent {
     rpc UpdateNode (NodeRequest) returns (NodeResponse) {}
     rpc DeleteNode (NodeRequest) returns (NodeResponse) {}
     rpc GetNodeGpuUsage(NodeGpuUsageRequest) returns (NodeGpuUsageResponse) {}
+    rpc GetNodeUsage(NodeUsageRequest) returns (NodeUsageResponse) {}
     rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
     rpc GetECIInstances(GetInstanceRequest) returns (GetInstanceResponse) {}
 }
@@ -164,6 +165,9 @@ message NodeGpuUsageRequest{
     repeated string nodeIds=1;
 }
 
+message NodeUsageRequest{
+}
+
 message NodeGpuUsageResponse{
     ActionCode code   = 1;
     string  message   = 2;
@@ -176,6 +180,20 @@ message NodeGpuUsage{
     int64 totalGpus=3;
     int64 usedGpus=4;
     repeated string podIds=5;
+}
+
+message NodeUsageResponse{
+    repeated NodeUsage usage = 1;
+}
+
+message NodeUsage{
+    string Id = 1;
+    string gpuType = 2;
+    string cpuType = 3;
+    int64 totalGPUs = 4;
+    int64 totalCPUs = 5;
+    int64 usedGPUs = 6;
+    int64 usedCPUs = 7;
 }
 
 message CreateWsTokenRequest{

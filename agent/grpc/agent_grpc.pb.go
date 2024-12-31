@@ -33,6 +33,7 @@ const (
 	Agent_UpdateNode_FullMethodName         = "/agent.Agent/UpdateNode"
 	Agent_DeleteNode_FullMethodName         = "/agent.Agent/DeleteNode"
 	Agent_GetNodeGpuUsage_FullMethodName    = "/agent.Agent/GetNodeGpuUsage"
+	Agent_GetNodeUsage_FullMethodName       = "/agent.Agent/GetNodeUsage"
 	Agent_CreateWsToken_FullMethodName      = "/agent.Agent/CreateWsToken"
 	Agent_GetECIInstances_FullMethodName    = "/agent.Agent/GetECIInstances"
 )
@@ -55,6 +56,7 @@ type AgentClient interface {
 	UpdateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	DeleteNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
 	GetNodeGpuUsage(ctx context.Context, in *NodeGpuUsageRequest, opts ...grpc.CallOption) (*NodeGpuUsageResponse, error)
+	GetNodeUsage(ctx context.Context, in *NodeUsageRequest, opts ...grpc.CallOption) (*NodeUsageResponse, error)
 	CreateWsToken(ctx context.Context, in *CreateWsTokenRequest, opts ...grpc.CallOption) (*CreateWsTokenResponse, error)
 	GetECIInstances(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*GetInstanceResponse, error)
 }
@@ -207,6 +209,16 @@ func (c *agentClient) GetNodeGpuUsage(ctx context.Context, in *NodeGpuUsageReque
 	return out, nil
 }
 
+func (c *agentClient) GetNodeUsage(ctx context.Context, in *NodeUsageRequest, opts ...grpc.CallOption) (*NodeUsageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NodeUsageResponse)
+	err := c.cc.Invoke(ctx, Agent_GetNodeUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *agentClient) CreateWsToken(ctx context.Context, in *CreateWsTokenRequest, opts ...grpc.CallOption) (*CreateWsTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWsTokenResponse)
@@ -245,6 +257,7 @@ type AgentServer interface {
 	UpdateNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	DeleteNode(context.Context, *NodeRequest) (*NodeResponse, error)
 	GetNodeGpuUsage(context.Context, *NodeGpuUsageRequest) (*NodeGpuUsageResponse, error)
+	GetNodeUsage(context.Context, *NodeUsageRequest) (*NodeUsageResponse, error)
 	CreateWsToken(context.Context, *CreateWsTokenRequest) (*CreateWsTokenResponse, error)
 	GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error)
 	mustEmbedUnimplementedAgentServer()
@@ -298,6 +311,9 @@ func (UnimplementedAgentServer) DeleteNode(context.Context, *NodeRequest) (*Node
 }
 func (UnimplementedAgentServer) GetNodeGpuUsage(context.Context, *NodeGpuUsageRequest) (*NodeGpuUsageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNodeGpuUsage not implemented")
+}
+func (UnimplementedAgentServer) GetNodeUsage(context.Context, *NodeUsageRequest) (*NodeUsageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNodeUsage not implemented")
 }
 func (UnimplementedAgentServer) CreateWsToken(context.Context, *CreateWsTokenRequest) (*CreateWsTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWsToken not implemented")
@@ -578,6 +594,24 @@ func _Agent_GetNodeGpuUsage_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Agent_GetNodeUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NodeUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetNodeUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetNodeUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetNodeUsage(ctx, req.(*NodeUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Agent_CreateWsToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateWsTokenRequest)
 	if err := dec(in); err != nil {
@@ -676,6 +710,10 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNodeGpuUsage",
 			Handler:    _Agent_GetNodeGpuUsage_Handler,
+		},
+		{
+			MethodName: "GetNodeUsage",
+			Handler:    _Agent_GetNodeUsage_Handler,
 		},
 		{
 			MethodName: "CreateWsToken",
