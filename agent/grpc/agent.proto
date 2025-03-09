@@ -62,14 +62,15 @@ message Pod {
 message PodRequest  {
     string gpu_type = 1;
     string cpu_type = 2;
-    string customer_id = 3;
-    string user_id = 4;
-    string restart_policy = 5;
-    int64 cpu = 6;
-    int64 ram = 7;
-    int64 gpu = 8;
-    repeated Pod pods = 9;
-    int64 temp_store_size = 10;
+    string cpu_name = 3;
+    string customer_id = 4;
+    string user_id = 5;
+    string restart_policy = 6;
+    int64 cpu = 7;
+    int64 ram = 8;
+    int64 gpu = 9;
+    repeated Pod pods = 10;
+    int64 temp_store_size = 11;
     string vnode_id = 12;
     repeated k8s.io.api.core.v1.Secret secrets = 13;
     repeated k8s.io.api.core.v1.ConfigMap configMaps = 14;
