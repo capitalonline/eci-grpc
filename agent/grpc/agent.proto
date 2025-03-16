@@ -194,6 +194,7 @@ message NodeUsage{
     int64 totalCPUs = 5;
     int64 usedGPUs = 6;
     int64 usedCPUs = 7;
+    string familyId = 8;
 }
 
 message CreateWsTokenRequest{
