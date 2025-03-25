@@ -23,11 +23,18 @@ service Agent {
     rpc GetNodeUsage(NodeUsageRequest) returns (NodeUsageResponse) {}
     rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
     rpc GetECIInstances(GetInstanceRequest) returns (GetInstanceResponse) {}
+    rpc UpdatePriceRange(PriceRangeRequest) returns (PriceRangeResponse) {}
 }
 
 enum ActionCode {
     SuccessCode = 0;
     FailCode = -1;
+}
+
+enum SpotStrategy {
+    NoSpot = 0;
+    SpotWithPriceLimit = 1;
+    SpotAsPriceGo = 2;
 }
 
 message NetworkInfo {
@@ -131,6 +138,8 @@ message QuantityInfo {
     int64 gpu = 3;
     string cpu_type = 4;
     string gpu_type = 5;
+    string min_spot_price = 6;
+    string max_spot_price = 7;
 }
 
 message ProductQuantity {
@@ -240,3 +249,13 @@ message GetInstanceRequest {
 message GetInstanceResponse {
     repeated string InstanceIds=1;
 }
+
+message PriceRangeRequest {
+    map<string, ProductQuantity> productQuantity = 1;
+}
+
+message PriceRangeResponse {
+    bool result = 1;
+    string message = 2;
+}
+
