@@ -19,23 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Agent_CreatePod_FullMethodName          = "/agent.Agent/CreatePod"
-	Agent_UpdatePod_FullMethodName          = "/agent.Agent/UpdatePod"
-	Agent_DeletePod_FullMethodName          = "/agent.Agent/DeletePod"
-	Agent_RebootPod_FullMethodName          = "/agent.Agent/RebootPod"
-	Agent_GetPod_FullMethodName             = "/agent.Agent/GetPod"
-	Agent_GetPods_FullMethodName            = "/agent.Agent/GetPods"
-	Agent_GetPodStatus_FullMethodName       = "/agent.Agent/GetPodStatus"
-	Agent_CheckResourceQuota_FullMethodName = "/agent.Agent/CheckResourceQuota"
-	Agent_GetResourceQuota_FullMethodName   = "/agent.Agent/GetResourceQuota"
-	Agent_SetResourceQuota_FullMethodName   = "/agent.Agent/SetResourceQuota"
-	Agent_CreateNode_FullMethodName         = "/agent.Agent/CreateNode"
-	Agent_UpdateNode_FullMethodName         = "/agent.Agent/UpdateNode"
-	Agent_DeleteNode_FullMethodName         = "/agent.Agent/DeleteNode"
-	Agent_GetNodeGpuUsage_FullMethodName    = "/agent.Agent/GetNodeGpuUsage"
-	Agent_GetNodeUsage_FullMethodName       = "/agent.Agent/GetNodeUsage"
-	Agent_CreateWsToken_FullMethodName      = "/agent.Agent/CreateWsToken"
-	Agent_GetECIInstances_FullMethodName    = "/agent.Agent/GetECIInstances"
+	Agent_CreatePod_FullMethodName        = "/agent.Agent/CreatePod"
+	Agent_UpdatePod_FullMethodName        = "/agent.Agent/UpdatePod"
+	Agent_DeletePod_FullMethodName        = "/agent.Agent/DeletePod"
+	Agent_RebootPod_FullMethodName        = "/agent.Agent/RebootPod"
+	Agent_GetPod_FullMethodName           = "/agent.Agent/GetPod"
+	Agent_GetPods_FullMethodName          = "/agent.Agent/GetPods"
+	Agent_GetPodStatus_FullMethodName     = "/agent.Agent/GetPodStatus"
+	Agent_GetResourceQuota_FullMethodName = "/agent.Agent/GetResourceQuota"
+	Agent_SetResourceQuota_FullMethodName = "/agent.Agent/SetResourceQuota"
+	Agent_CreateNode_FullMethodName       = "/agent.Agent/CreateNode"
+	Agent_UpdateNode_FullMethodName       = "/agent.Agent/UpdateNode"
+	Agent_DeleteNode_FullMethodName       = "/agent.Agent/DeleteNode"
+	Agent_GetNodeGpuUsage_FullMethodName  = "/agent.Agent/GetNodeGpuUsage"
+	Agent_GetNodeUsage_FullMethodName     = "/agent.Agent/GetNodeUsage"
+	Agent_CreateWsToken_FullMethodName    = "/agent.Agent/CreateWsToken"
+	Agent_GetECIInstances_FullMethodName  = "/agent.Agent/GetECIInstances"
 )
 
 // AgentClient is the client API for Agent service.
@@ -49,7 +48,6 @@ type AgentClient interface {
 	GetPod(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	GetPods(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	GetPodStatus(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
-	CheckResourceQuota(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*QuotaResponse, error)
 	GetResourceQuota(ctx context.Context, in *QuotaGetRequest, opts ...grpc.CallOption) (*QuotaStatusResponse, error)
 	SetResourceQuota(ctx context.Context, in *QuotaSetRequest, opts ...grpc.CallOption) (*QuotaResponse, error)
 	CreateNode(ctx context.Context, in *NodeRequest, opts ...grpc.CallOption) (*NodeResponse, error)
@@ -133,16 +131,6 @@ func (c *agentClient) GetPodStatus(ctx context.Context, in *PodInfoRequest, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PodInfoResponse)
 	err := c.cc.Invoke(ctx, Agent_GetPodStatus_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *agentClient) CheckResourceQuota(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*QuotaResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(QuotaResponse)
-	err := c.cc.Invoke(ctx, Agent_CheckResourceQuota_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -250,7 +238,6 @@ type AgentServer interface {
 	GetPod(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	GetPods(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
-	CheckResourceQuota(context.Context, *PodRequest) (*QuotaResponse, error)
 	GetResourceQuota(context.Context, *QuotaGetRequest) (*QuotaStatusResponse, error)
 	SetResourceQuota(context.Context, *QuotaSetRequest) (*QuotaResponse, error)
 	CreateNode(context.Context, *NodeRequest) (*NodeResponse, error)
@@ -290,9 +277,6 @@ func (UnimplementedAgentServer) GetPods(context.Context, *PodInfoRequest) (*PodI
 }
 func (UnimplementedAgentServer) GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPodStatus not implemented")
-}
-func (UnimplementedAgentServer) CheckResourceQuota(context.Context, *PodRequest) (*QuotaResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckResourceQuota not implemented")
 }
 func (UnimplementedAgentServer) GetResourceQuota(context.Context, *QuotaGetRequest) (*QuotaStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResourceQuota not implemented")
@@ -464,24 +448,6 @@ func _Agent_GetPodStatus_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AgentServer).GetPodStatus(ctx, req.(*PodInfoRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Agent_CheckResourceQuota_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PodRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AgentServer).CheckResourceQuota(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Agent_CheckResourceQuota_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentServer).CheckResourceQuota(ctx, req.(*PodRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -682,10 +648,6 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPodStatus",
 			Handler:    _Agent_GetPodStatus_Handler,
-		},
-		{
-			MethodName: "CheckResourceQuota",
-			Handler:    _Agent_CheckResourceQuota_Handler,
 		},
 		{
 			MethodName: "GetResourceQuota",
