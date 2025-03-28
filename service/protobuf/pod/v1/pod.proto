@@ -6,13 +6,11 @@ package pod;
 
 option go_package = "./pod";
 
-
-
 service EciService {
   rpc SavePod(EciPod) returns (SavePodResp) {}
   rpc SaveVNode(EciVNode) returns (SaveVNodeResp) {}
+  rpc SendUserNotification(NotifyRequest) returns (NotifyResponse) {}
 }
-
 
 message EciPod {
   string CustomerId = 1;
@@ -75,3 +73,7 @@ message SaveVNodeResp {
   string Code = 1; // v: required
   string Msg = 2; // v: required
 }
+
+message NotifyRequest {}
+
+message NotifyResponse{}

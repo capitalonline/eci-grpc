@@ -21,8 +21,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EciService_SavePod_FullMethodName   = "/pod.EciService/SavePod"
-	EciService_SaveVNode_FullMethodName = "/pod.EciService/SaveVNode"
+	EciService_SavePod_FullMethodName              = "/pod.EciService/SavePod"
+	EciService_SaveVNode_FullMethodName            = "/pod.EciService/SaveVNode"
+	EciService_SendUserNotification_FullMethodName = "/pod.EciService/SendUserNotification"
 )
 
 // EciServiceClient is the client API for EciService service.
@@ -31,6 +32,7 @@ const (
 type EciServiceClient interface {
 	SavePod(ctx context.Context, in *EciPod, opts ...grpc.CallOption) (*SavePodResp, error)
 	SaveVNode(ctx context.Context, in *EciVNode, opts ...grpc.CallOption) (*SaveVNodeResp, error)
+	SendUserNotification(ctx context.Context, in *NotifyRequest, opts ...grpc.CallOption) (*NotifyResponse, error)
 }
 
 type eciServiceClient struct {
@@ -61,12 +63,23 @@ func (c *eciServiceClient) SaveVNode(ctx context.Context, in *EciVNode, opts ...
 	return out, nil
 }
 
+func (c *eciServiceClient) SendUserNotification(ctx context.Context, in *NotifyRequest, opts ...grpc.CallOption) (*NotifyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NotifyResponse)
+	err := c.cc.Invoke(ctx, EciService_SendUserNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EciServiceServer is the server API for EciService service.
 // All implementations must embed UnimplementedEciServiceServer
 // for forward compatibility.
 type EciServiceServer interface {
 	SavePod(context.Context, *EciPod) (*SavePodResp, error)
 	SaveVNode(context.Context, *EciVNode) (*SaveVNodeResp, error)
+	SendUserNotification(context.Context, *NotifyRequest) (*NotifyResponse, error)
 	mustEmbedUnimplementedEciServiceServer()
 }
 
@@ -82,6 +95,9 @@ func (UnimplementedEciServiceServer) SavePod(context.Context, *EciPod) (*SavePod
 }
 func (UnimplementedEciServiceServer) SaveVNode(context.Context, *EciVNode) (*SaveVNodeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveVNode not implemented")
+}
+func (UnimplementedEciServiceServer) SendUserNotification(context.Context, *NotifyRequest) (*NotifyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendUserNotification not implemented")
 }
 func (UnimplementedEciServiceServer) mustEmbedUnimplementedEciServiceServer() {}
 func (UnimplementedEciServiceServer) testEmbeddedByValue()                    {}
@@ -140,6 +156,24 @@ func _EciService_SaveVNode_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EciService_SendUserNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(NotifyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EciServiceServer).SendUserNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EciService_SendUserNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EciServiceServer).SendUserNotification(ctx, req.(*NotifyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EciService_ServiceDesc is the grpc.ServiceDesc for EciService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -154,6 +188,10 @@ var EciService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SaveVNode",
 			Handler:    _EciService_SaveVNode_Handler,
+		},
+		{
+			MethodName: "SendUserNotification",
+			Handler:    _EciService_SendUserNotification_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
