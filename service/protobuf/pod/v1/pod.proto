@@ -76,6 +76,15 @@ message SaveVNodeResp {
   string Msg = 2; // v: required
 }
 
-message NotifyRequest {}
+enum NotifyCode {
+  SpotFailed = 0;
+}
+
+message NotifyRequest {
+  string CustomerId = 1;
+  string UserId     = 2;
+  string Id         = 3;
+  NotifyCode code   = 4;
+}
 
 message NotifyResponse{}
