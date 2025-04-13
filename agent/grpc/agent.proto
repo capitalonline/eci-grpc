@@ -84,10 +84,16 @@ message PodRequest  {
     string spotPrice = 16;
 }
 
+enum DeleteCode {
+    Default = 0;
+    SpotFailed = 1;
+}
+
 message PodDeleteRequest  {
     string vNodeID = 1;
     string name = 2;
     string namespace = 3;
+    DeleteCode code   = 4;
 }
 
 message PodRebootRequest  {
