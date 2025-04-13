@@ -87,6 +87,7 @@ message PodRequest  {
 enum DeleteCode {
     Default = 0;
     SpotFailed = 1;
+    SpotDelayed = 2;
 }
 
 message PodDeleteRequest  {
