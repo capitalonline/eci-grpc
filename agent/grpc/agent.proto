@@ -25,6 +25,8 @@ service Agent {
     rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
     rpc GetECIInstances(GetInstanceRequest) returns (GetInstanceResponse) {}
     rpc UpdatePriceRange(PriceRangeRequest) returns (PriceRangeResponse) {}
+    rpc CreateDataCache(DataCacheRequest) returns (DataCacheResponse) {}
+    rpc DeleteDataCache (DataCacheRequest) returns (DataCacheResponse) {}
 }
 
 enum ActionCode {
@@ -262,3 +264,32 @@ message PriceRangeResponse {
     string message = 2;
 }
 
+message DataCacheRequest {
+    NetworkInfo network = 1;
+    string image = 2;
+    DataCacheOptions dest = 3;
+    DataCacheOptions source = 4;
+    string id = 5;
+    string customer_id = 6;
+    string user_id = 7;
+}
+
+message DataCacheOptions {
+    string type = 1;
+    string path = 2;
+    string url = 3;
+    string server = 4;
+    string otherOpts = 5;
+    string bucket = 6;
+    string akId = 7;
+    string akSecret = 8;
+    string accessToken = 9;
+    string repoSource = 10;
+    string repoId = 11;
+    string revision = 12;
+}
+
+message DataCacheResponse  {
+    ActionCode code   = 1;
+    string  message   = 2;
+}
