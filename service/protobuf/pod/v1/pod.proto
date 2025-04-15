@@ -22,6 +22,11 @@ message EciPod {
   string spotPrice = 7;
 }
 
+enum PodStatusCode {
+  StatusDefault = 0;
+  StatusSpotFailed = 1;
+}
+
 message Pod {
   string Id = 1;
   string UID = 2;
@@ -39,6 +44,7 @@ message Pod {
   string RestartPolicy = 14;
   string FamilyId = 15;
   repeated Container Containers = 16;
+  PodStatusCode code = 17;
 }
 
 message NetworkInfo {
