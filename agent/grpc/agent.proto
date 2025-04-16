@@ -187,7 +187,6 @@ message NodeGpuUsageRequest{
 }
 
 message NodeUsageRequest{
-    SpotStrategy spotStrategy = 1;
 }
 
 message NodeGpuUsageResponse{
@@ -208,14 +207,19 @@ message NodeUsageResponse{
     repeated NodeUsage usage = 1;
 }
 
+message UsageInfo {
+    int64 gpus = 1;
+    int64 cpus = 2;
+}
+
 message NodeUsage{
     string Id = 1;
     string gpuType = 2;
     string cpuType = 3;
-    int64 totalGPUs = 4;
-    int64 totalCPUs = 5;
-    int64 usedGPUs = 6;
-    int64 usedCPUs = 7;
+    UsageInfo totalUsage = 4;
+    UsageInfo usedUsage = 5;
+    UsageInfo usedSpotPriceLimitUsage = 6;
+    UsageInfo usedSpotPriceGoUsage = 7;
     string familyId = 8;
 }
 
