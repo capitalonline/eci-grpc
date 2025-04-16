@@ -24,7 +24,7 @@ service Agent {
     rpc GetNodeUsage(NodeUsageRequest) returns (NodeUsageResponse) {}
     rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
     rpc GetECIInstances(GetInstanceRequest) returns (GetInstanceResponse) {}
-    rpc UpdatePriceRange(PriceRangeRequest) returns (PriceRangeResponse) {}
+    rpc UpdateFamilySpecInfo(PriceRangeRequest) returns (PriceRangeResponse) {}
     rpc CreateDataCache(DataCacheRequest) returns (DataCacheResponse) {}
     rpc DeleteDataCache (DataCacheRequest) returns (DataCacheResponse) {}
 }
@@ -219,7 +219,7 @@ message NodeUsage{
     UsageInfo totalUsage = 4;
     UsageInfo usedUsage = 5;
     UsageInfo usedSpotPriceLimitUsage = 6;
-    UsageInfo usedSpotPriceAsGoUsage = 7;
+    UsageInfo usedSpotAsPriceGoUsage = 7;
     string familyId = 8;
 }
 
