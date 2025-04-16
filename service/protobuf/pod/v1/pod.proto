@@ -85,7 +85,7 @@ message SaveVNodeResp {
 
 enum NotifyCode {
   SpotFailed = 0;
-  SpotDelayedDelete = 1;
+  SpotCancelDelete = 1;
 }
 
 message NotifyRequest {
