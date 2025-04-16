@@ -25,6 +25,7 @@ message EciPod {
 enum PodStatusCode {
   StatusDefault = 0;
   StatusSpotFailed = 1;
+  StatusSpotDelayedDelete = 2;
 }
 
 message Pod {
