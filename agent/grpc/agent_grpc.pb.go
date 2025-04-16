@@ -19,26 +19,26 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Agent_CreatePod_FullMethodName          = "/agent.Agent/CreatePod"
-	Agent_UpdatePod_FullMethodName          = "/agent.Agent/UpdatePod"
-	Agent_DeletePod_FullMethodName          = "/agent.Agent/DeletePod"
-	Agent_RebootPod_FullMethodName          = "/agent.Agent/RebootPod"
-	Agent_GetPod_FullMethodName             = "/agent.Agent/GetPod"
-	Agent_GetPods_FullMethodName            = "/agent.Agent/GetPods"
-	Agent_GetPodStatus_FullMethodName       = "/agent.Agent/GetPodStatus"
-	Agent_CheckResourceQuota_FullMethodName = "/agent.Agent/CheckResourceQuota"
-	Agent_GetResourceQuota_FullMethodName   = "/agent.Agent/GetResourceQuota"
-	Agent_SetResourceQuota_FullMethodName   = "/agent.Agent/SetResourceQuota"
-	Agent_CreateNode_FullMethodName         = "/agent.Agent/CreateNode"
-	Agent_UpdateNode_FullMethodName         = "/agent.Agent/UpdateNode"
-	Agent_DeleteNode_FullMethodName         = "/agent.Agent/DeleteNode"
-	Agent_GetNodeGpuUsage_FullMethodName    = "/agent.Agent/GetNodeGpuUsage"
-	Agent_GetNodeUsage_FullMethodName       = "/agent.Agent/GetNodeUsage"
-	Agent_CreateWsToken_FullMethodName      = "/agent.Agent/CreateWsToken"
-	Agent_GetECIInstances_FullMethodName    = "/agent.Agent/GetECIInstances"
-	Agent_UpdatePriceRange_FullMethodName   = "/agent.Agent/UpdatePriceRange"
-	Agent_CreateDataCache_FullMethodName    = "/agent.Agent/CreateDataCache"
-	Agent_DeleteDataCache_FullMethodName    = "/agent.Agent/DeleteDataCache"
+	Agent_CreatePod_FullMethodName            = "/agent.Agent/CreatePod"
+	Agent_UpdatePod_FullMethodName            = "/agent.Agent/UpdatePod"
+	Agent_DeletePod_FullMethodName            = "/agent.Agent/DeletePod"
+	Agent_RebootPod_FullMethodName            = "/agent.Agent/RebootPod"
+	Agent_GetPod_FullMethodName               = "/agent.Agent/GetPod"
+	Agent_GetPods_FullMethodName              = "/agent.Agent/GetPods"
+	Agent_GetPodStatus_FullMethodName         = "/agent.Agent/GetPodStatus"
+	Agent_CheckResourceQuota_FullMethodName   = "/agent.Agent/CheckResourceQuota"
+	Agent_GetResourceQuota_FullMethodName     = "/agent.Agent/GetResourceQuota"
+	Agent_SetResourceQuota_FullMethodName     = "/agent.Agent/SetResourceQuota"
+	Agent_CreateNode_FullMethodName           = "/agent.Agent/CreateNode"
+	Agent_UpdateNode_FullMethodName           = "/agent.Agent/UpdateNode"
+	Agent_DeleteNode_FullMethodName           = "/agent.Agent/DeleteNode"
+	Agent_GetNodeGpuUsage_FullMethodName      = "/agent.Agent/GetNodeGpuUsage"
+	Agent_GetNodeUsage_FullMethodName         = "/agent.Agent/GetNodeUsage"
+	Agent_CreateWsToken_FullMethodName        = "/agent.Agent/CreateWsToken"
+	Agent_GetECIInstances_FullMethodName      = "/agent.Agent/GetECIInstances"
+	Agent_UpdateFamilySpecInfo_FullMethodName = "/agent.Agent/UpdateFamilySpecInfo"
+	Agent_CreateDataCache_FullMethodName      = "/agent.Agent/CreateDataCache"
+	Agent_DeleteDataCache_FullMethodName      = "/agent.Agent/DeleteDataCache"
 )
 
 // AgentClient is the client API for Agent service.
@@ -62,7 +62,7 @@ type AgentClient interface {
 	GetNodeUsage(ctx context.Context, in *NodeUsageRequest, opts ...grpc.CallOption) (*NodeUsageResponse, error)
 	CreateWsToken(ctx context.Context, in *CreateWsTokenRequest, opts ...grpc.CallOption) (*CreateWsTokenResponse, error)
 	GetECIInstances(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*GetInstanceResponse, error)
-	UpdatePriceRange(ctx context.Context, in *PriceRangeRequest, opts ...grpc.CallOption) (*PriceRangeResponse, error)
+	UpdateFamilySpecInfo(ctx context.Context, in *PriceRangeRequest, opts ...grpc.CallOption) (*PriceRangeResponse, error)
 	CreateDataCache(ctx context.Context, in *DataCacheRequest, opts ...grpc.CallOption) (*DataCacheResponse, error)
 	DeleteDataCache(ctx context.Context, in *DataCacheRequest, opts ...grpc.CallOption) (*DataCacheResponse, error)
 }
@@ -245,10 +245,10 @@ func (c *agentClient) GetECIInstances(ctx context.Context, in *GetInstanceReques
 	return out, nil
 }
 
-func (c *agentClient) UpdatePriceRange(ctx context.Context, in *PriceRangeRequest, opts ...grpc.CallOption) (*PriceRangeResponse, error) {
+func (c *agentClient) UpdateFamilySpecInfo(ctx context.Context, in *PriceRangeRequest, opts ...grpc.CallOption) (*PriceRangeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PriceRangeResponse)
-	err := c.cc.Invoke(ctx, Agent_UpdatePriceRange_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Agent_UpdateFamilySpecInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -296,7 +296,7 @@ type AgentServer interface {
 	GetNodeUsage(context.Context, *NodeUsageRequest) (*NodeUsageResponse, error)
 	CreateWsToken(context.Context, *CreateWsTokenRequest) (*CreateWsTokenResponse, error)
 	GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error)
-	UpdatePriceRange(context.Context, *PriceRangeRequest) (*PriceRangeResponse, error)
+	UpdateFamilySpecInfo(context.Context, *PriceRangeRequest) (*PriceRangeResponse, error)
 	CreateDataCache(context.Context, *DataCacheRequest) (*DataCacheResponse, error)
 	DeleteDataCache(context.Context, *DataCacheRequest) (*DataCacheResponse, error)
 	mustEmbedUnimplementedAgentServer()
@@ -360,8 +360,8 @@ func (UnimplementedAgentServer) CreateWsToken(context.Context, *CreateWsTokenReq
 func (UnimplementedAgentServer) GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetECIInstances not implemented")
 }
-func (UnimplementedAgentServer) UpdatePriceRange(context.Context, *PriceRangeRequest) (*PriceRangeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePriceRange not implemented")
+func (UnimplementedAgentServer) UpdateFamilySpecInfo(context.Context, *PriceRangeRequest) (*PriceRangeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFamilySpecInfo not implemented")
 }
 func (UnimplementedAgentServer) CreateDataCache(context.Context, *DataCacheRequest) (*DataCacheResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDataCache not implemented")
@@ -696,20 +696,20 @@ func _Agent_GetECIInstances_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Agent_UpdatePriceRange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Agent_UpdateFamilySpecInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PriceRangeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AgentServer).UpdatePriceRange(ctx, in)
+		return srv.(AgentServer).UpdateFamilySpecInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Agent_UpdatePriceRange_FullMethodName,
+		FullMethod: Agent_UpdateFamilySpecInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentServer).UpdatePriceRange(ctx, req.(*PriceRangeRequest))
+		return srv.(AgentServer).UpdateFamilySpecInfo(ctx, req.(*PriceRangeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -826,8 +826,8 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Agent_GetECIInstances_Handler,
 		},
 		{
-			MethodName: "UpdatePriceRange",
-			Handler:    _Agent_UpdatePriceRange_Handler,
+			MethodName: "UpdateFamilySpecInfo",
+			Handler:    _Agent_UpdateFamilySpecInfo_Handler,
 		},
 		{
 			MethodName: "CreateDataCache",
