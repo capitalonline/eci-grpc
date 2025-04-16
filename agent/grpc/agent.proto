@@ -187,6 +187,7 @@ message NodeGpuUsageRequest{
 }
 
 message NodeUsageRequest{
+    SpotStrategy spotStrategy = 1;
 }
 
 message NodeGpuUsageResponse{
