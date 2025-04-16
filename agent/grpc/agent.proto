@@ -219,7 +219,7 @@ message NodeUsage{
     UsageInfo totalUsage = 4;
     UsageInfo usedUsage = 5;
     UsageInfo usedSpotPriceLimitUsage = 6;
-    UsageInfo usedSpotPriceGoUsage = 7;
+    UsageInfo usedSpotPriceAsGoUsage = 7;
     string familyId = 8;
 }
 
