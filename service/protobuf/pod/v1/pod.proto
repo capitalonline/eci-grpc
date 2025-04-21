@@ -10,6 +10,7 @@ service EciService {
   rpc SavePod(EciPod) returns (SavePodResp) {}
   rpc SaveVNode(EciVNode) returns (SaveVNodeResp) {}
   rpc SendUserNotification(NotifyRequest) returns (NotifyResponse) {}
+  rpc HasBalance(BalanceRequest) returns (BalanceResponse) {}
 }
 
 message EciPod {
@@ -96,3 +97,12 @@ message NotifyRequest {
 }
 
 message NotifyResponse{}
+
+message BalanceRequest{
+  string CustomerId = 1;
+  string UserId     = 2;
+}
+
+message BalanceResponse{
+  bool result = 1;
+}
