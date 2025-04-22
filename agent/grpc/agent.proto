@@ -221,6 +221,7 @@ message NodeUsage{
     UsageInfo usedSpotPriceLimitUsage = 6;
     UsageInfo usedSpotAsPriceGoUsage = 7;
     string familyId = 8;
+    float lowestGPUPricePerUnit = 9;
 }
 
 message CreateWsTokenRequest{
