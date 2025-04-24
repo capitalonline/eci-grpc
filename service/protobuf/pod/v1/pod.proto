@@ -11,6 +11,7 @@ service EciService {
   rpc SaveVNode(EciVNode) returns (SaveVNodeResp) {}
   rpc SendUserNotification(NotifyRequest) returns (NotifyResponse) {}
   rpc HasBalance(BalanceRequest) returns (BalanceResponse) {}
+  rpc SaveCaches(EciCache) returns (SaveCacheResponse) {}
 }
 
 message EciPod {
@@ -105,4 +106,15 @@ message BalanceRequest{
 
 message BalanceResponse{
   bool result = 1;
+}
+
+message EciCache{
+  string  Id = 1;
+  int32   progress = 2;
+  string  errMessage = 3;
+}
+
+message SaveCacheResponse{
+  string Code = 1;
+  string Msg = 2;
 }

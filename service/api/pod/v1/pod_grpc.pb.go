@@ -25,6 +25,7 @@ const (
 	EciService_SaveVNode_FullMethodName            = "/pod.EciService/SaveVNode"
 	EciService_SendUserNotification_FullMethodName = "/pod.EciService/SendUserNotification"
 	EciService_HasBalance_FullMethodName           = "/pod.EciService/HasBalance"
+	EciService_SaveCaches_FullMethodName           = "/pod.EciService/SaveCaches"
 )
 
 // EciServiceClient is the client API for EciService service.
@@ -35,6 +36,7 @@ type EciServiceClient interface {
 	SaveVNode(ctx context.Context, in *EciVNode, opts ...grpc.CallOption) (*SaveVNodeResp, error)
 	SendUserNotification(ctx context.Context, in *NotifyRequest, opts ...grpc.CallOption) (*NotifyResponse, error)
 	HasBalance(ctx context.Context, in *BalanceRequest, opts ...grpc.CallOption) (*BalanceResponse, error)
+	SaveCaches(ctx context.Context, in *EciCache, opts ...grpc.CallOption) (*SaveCacheResponse, error)
 }
 
 type eciServiceClient struct {
@@ -85,6 +87,16 @@ func (c *eciServiceClient) HasBalance(ctx context.Context, in *BalanceRequest, o
 	return out, nil
 }
 
+func (c *eciServiceClient) SaveCaches(ctx context.Context, in *EciCache, opts ...grpc.CallOption) (*SaveCacheResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SaveCacheResponse)
+	err := c.cc.Invoke(ctx, EciService_SaveCaches_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EciServiceServer is the server API for EciService service.
 // All implementations must embed UnimplementedEciServiceServer
 // for forward compatibility.
@@ -93,6 +105,7 @@ type EciServiceServer interface {
 	SaveVNode(context.Context, *EciVNode) (*SaveVNodeResp, error)
 	SendUserNotification(context.Context, *NotifyRequest) (*NotifyResponse, error)
 	HasBalance(context.Context, *BalanceRequest) (*BalanceResponse, error)
+	SaveCaches(context.Context, *EciCache) (*SaveCacheResponse, error)
 	mustEmbedUnimplementedEciServiceServer()
 }
 
@@ -114,6 +127,9 @@ func (UnimplementedEciServiceServer) SendUserNotification(context.Context, *Noti
 }
 func (UnimplementedEciServiceServer) HasBalance(context.Context, *BalanceRequest) (*BalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method HasBalance not implemented")
+}
+func (UnimplementedEciServiceServer) SaveCaches(context.Context, *EciCache) (*SaveCacheResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveCaches not implemented")
 }
 func (UnimplementedEciServiceServer) mustEmbedUnimplementedEciServiceServer() {}
 func (UnimplementedEciServiceServer) testEmbeddedByValue()                    {}
@@ -208,6 +224,24 @@ func _EciService_HasBalance_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EciService_SaveCaches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EciCache)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EciServiceServer).SaveCaches(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EciService_SaveCaches_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EciServiceServer).SaveCaches(ctx, req.(*EciCache))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EciService_ServiceDesc is the grpc.ServiceDesc for EciService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -230,6 +264,10 @@ var EciService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "HasBalance",
 			Handler:    _EciService_HasBalance_Handler,
+		},
+		{
+			MethodName: "SaveCaches",
+			Handler:    _EciService_SaveCaches_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
