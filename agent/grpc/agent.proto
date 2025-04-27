@@ -272,7 +272,7 @@ message PriceRangeResponse {
 }
 
 message DataCacheRequest {
-    NetworkInfo network = 1;
+    DataCacheNetworkInfo network = 1;
     string image = 2;
     DataCacheOptions dest = 3;
     DataCacheOptions source = 4;
