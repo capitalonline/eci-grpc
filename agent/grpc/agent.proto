@@ -300,3 +300,10 @@ message DataCacheResponse  {
     ActionCode code   = 1;
     string  message   = 2;
 }
+
+message DataCacheNetworkInfo {
+    string ip = 1;
+    string vlan = 2;
+    string gateway = 3;
+    string dns = 4;
+}
