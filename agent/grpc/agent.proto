@@ -84,6 +84,8 @@ message PodRequest  {
     repeated k8s.io.api.core.v1.ConfigMap configMaps = 14;
     string spotStrategy = 15;
     string spotPrice = 16;
+    string zone = 17;
+    bool cloudEdge = 18;
 }
 
 enum DeleteCode {
