@@ -95,6 +95,7 @@ message NotifyRequest {
   string UserId     = 2;
   string Id         = 3;
   NotifyCode code   = 4;
+  int64 spotTime = 5;
 }
 
 message NotifyResponse{}
