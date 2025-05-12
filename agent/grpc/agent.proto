@@ -215,15 +215,16 @@ message UsageInfo {
 }
 
 message NodeUsage{
-    string Id = 1;
-    string gpuType = 2;
-    string cpuType = 3;
-    UsageInfo totalUsage = 4;
-    UsageInfo usedUsage = 5;
-    UsageInfo usedSpotPriceLimitUsage = 6;
-    UsageInfo usedSpotAsPriceGoUsage = 7;
-    string familyId = 8;
-    float lowestGPUPricePerUnit = 9;
+    string id = 1;
+    string name = 2;
+    string gpuType = 3;
+    string cpuType = 4;
+    UsageInfo totalUsage = 5;
+    UsageInfo usedUsage = 6;
+    UsageInfo usedSpotPriceLimitUsage = 7;
+    UsageInfo usedSpotAsPriceGoUsage = 8;
+    string familyId = 9;
+    float lowestGPUPricePerUnit = 10;
 }
 
 message CreateWsTokenRequest{
