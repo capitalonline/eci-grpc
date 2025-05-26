@@ -62,7 +62,7 @@ type AgentClient interface {
 	GetNodeUsage(ctx context.Context, in *NodeUsageRequest, opts ...grpc.CallOption) (*NodeUsageResponse, error)
 	CreateWsToken(ctx context.Context, in *CreateWsTokenRequest, opts ...grpc.CallOption) (*CreateWsTokenResponse, error)
 	GetECIInstances(ctx context.Context, in *GetInstanceRequest, opts ...grpc.CallOption) (*GetInstanceResponse, error)
-	UpdateFamilySpecInfo(ctx context.Context, in *PriceRangeRequest, opts ...grpc.CallOption) (*PriceRangeResponse, error)
+	UpdateFamilySpecInfo(ctx context.Context, in *FamilySpecRequest, opts ...grpc.CallOption) (*FamilySpecResponse, error)
 	CreateDataCache(ctx context.Context, in *DataCacheRequest, opts ...grpc.CallOption) (*DataCacheResponse, error)
 	DeleteDataCache(ctx context.Context, in *DataCacheRequest, opts ...grpc.CallOption) (*DataCacheResponse, error)
 }
@@ -245,9 +245,9 @@ func (c *agentClient) GetECIInstances(ctx context.Context, in *GetInstanceReques
 	return out, nil
 }
 
-func (c *agentClient) UpdateFamilySpecInfo(ctx context.Context, in *PriceRangeRequest, opts ...grpc.CallOption) (*PriceRangeResponse, error) {
+func (c *agentClient) UpdateFamilySpecInfo(ctx context.Context, in *FamilySpecRequest, opts ...grpc.CallOption) (*FamilySpecResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PriceRangeResponse)
+	out := new(FamilySpecResponse)
 	err := c.cc.Invoke(ctx, Agent_UpdateFamilySpecInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -296,7 +296,7 @@ type AgentServer interface {
 	GetNodeUsage(context.Context, *NodeUsageRequest) (*NodeUsageResponse, error)
 	CreateWsToken(context.Context, *CreateWsTokenRequest) (*CreateWsTokenResponse, error)
 	GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error)
-	UpdateFamilySpecInfo(context.Context, *PriceRangeRequest) (*PriceRangeResponse, error)
+	UpdateFamilySpecInfo(context.Context, *FamilySpecRequest) (*FamilySpecResponse, error)
 	CreateDataCache(context.Context, *DataCacheRequest) (*DataCacheResponse, error)
 	DeleteDataCache(context.Context, *DataCacheRequest) (*DataCacheResponse, error)
 	mustEmbedUnimplementedAgentServer()
@@ -360,7 +360,7 @@ func (UnimplementedAgentServer) CreateWsToken(context.Context, *CreateWsTokenReq
 func (UnimplementedAgentServer) GetECIInstances(context.Context, *GetInstanceRequest) (*GetInstanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetECIInstances not implemented")
 }
-func (UnimplementedAgentServer) UpdateFamilySpecInfo(context.Context, *PriceRangeRequest) (*PriceRangeResponse, error) {
+func (UnimplementedAgentServer) UpdateFamilySpecInfo(context.Context, *FamilySpecRequest) (*FamilySpecResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFamilySpecInfo not implemented")
 }
 func (UnimplementedAgentServer) CreateDataCache(context.Context, *DataCacheRequest) (*DataCacheResponse, error) {
@@ -697,7 +697,7 @@ func _Agent_GetECIInstances_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _Agent_UpdateFamilySpecInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PriceRangeRequest)
+	in := new(FamilySpecRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -709,7 +709,7 @@ func _Agent_UpdateFamilySpecInfo_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: Agent_UpdateFamilySpecInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentServer).UpdateFamilySpecInfo(ctx, req.(*PriceRangeRequest))
+		return srv.(AgentServer).UpdateFamilySpecInfo(ctx, req.(*FamilySpecRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

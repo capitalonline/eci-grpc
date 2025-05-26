@@ -2348,7 +2348,7 @@ func (x *GetInstanceResponse) GetInstanceIds() []string {
 	return nil
 }
 
-type PriceRangeRequest struct {
+type FamilySpecRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2356,20 +2356,20 @@ type PriceRangeRequest struct {
 	ProductQuantity map[string]*ProductQuantity `protobuf:"bytes,1,rep,name=productQuantity,proto3" json:"productQuantity,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
-func (x *PriceRangeRequest) Reset() {
-	*x = PriceRangeRequest{}
+func (x *FamilySpecRequest) Reset() {
+	*x = FamilySpecRequest{}
 	mi := &file_agent_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PriceRangeRequest) String() string {
+func (x *FamilySpecRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PriceRangeRequest) ProtoMessage() {}
+func (*FamilySpecRequest) ProtoMessage() {}
 
-func (x *PriceRangeRequest) ProtoReflect() protoreflect.Message {
+func (x *FamilySpecRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_agent_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2381,19 +2381,19 @@ func (x *PriceRangeRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PriceRangeRequest.ProtoReflect.Descriptor instead.
-func (*PriceRangeRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use FamilySpecRequest.ProtoReflect.Descriptor instead.
+func (*FamilySpecRequest) Descriptor() ([]byte, []int) {
 	return file_agent_proto_rawDescGZIP(), []int{33}
 }
 
-func (x *PriceRangeRequest) GetProductQuantity() map[string]*ProductQuantity {
+func (x *FamilySpecRequest) GetProductQuantity() map[string]*ProductQuantity {
 	if x != nil {
 		return x.ProductQuantity
 	}
 	return nil
 }
 
-type PriceRangeResponse struct {
+type FamilySpecResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -2402,20 +2402,20 @@ type PriceRangeResponse struct {
 	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 }
 
-func (x *PriceRangeResponse) Reset() {
-	*x = PriceRangeResponse{}
+func (x *FamilySpecResponse) Reset() {
+	*x = FamilySpecResponse{}
 	mi := &file_agent_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PriceRangeResponse) String() string {
+func (x *FamilySpecResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PriceRangeResponse) ProtoMessage() {}
+func (*FamilySpecResponse) ProtoMessage() {}
 
-func (x *PriceRangeResponse) ProtoReflect() protoreflect.Message {
+func (x *FamilySpecResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_agent_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2427,19 +2427,19 @@ func (x *PriceRangeResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PriceRangeResponse.ProtoReflect.Descriptor instead.
-func (*PriceRangeResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use FamilySpecResponse.ProtoReflect.Descriptor instead.
+func (*FamilySpecResponse) Descriptor() ([]byte, []int) {
 	return file_agent_proto_rawDescGZIP(), []int{34}
 }
 
-func (x *PriceRangeResponse) GetResult() bool {
+func (x *FamilySpecResponse) GetResult() bool {
 	if x != nil {
 		return x.Result
 	}
 	return false
 }
 
-func (x *PriceRangeResponse) GetMessage() string {
+func (x *FamilySpecResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
@@ -3112,10 +3112,10 @@ var file_agent_proto_rawDesc = []byte{
 	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x49, 0x6e, 0x73,
 	0x74, 0x61, 0x6e, 0x63, 0x65, 0x49, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b,
 	0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63, 0x65, 0x49, 0x64, 0x73, 0x22, 0xc8, 0x01, 0x0a, 0x11,
-	0x50, 0x72, 0x69, 0x63, 0x65, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x46, 0x61, 0x6d, 0x69, 0x6c, 0x79, 0x53, 0x70, 0x65, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
 	0x74, 0x12, 0x57, 0x0a, 0x0f, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e,
 	0x74, 0x69, 0x74, 0x79, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x61, 0x67, 0x65,
-	0x6e, 0x74, 0x2e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x71,
+	0x6e, 0x74, 0x2e, 0x46, 0x61, 0x6d, 0x69, 0x6c, 0x79, 0x53, 0x70, 0x65, 0x63, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e,
 	0x74, 0x69, 0x74, 0x79, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0f, 0x70, 0x72, 0x6f, 0x64, 0x75,
 	0x63, 0x74, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x1a, 0x5a, 0x0a, 0x14, 0x50, 0x72,
@@ -3124,8 +3124,8 @@ var file_agent_proto_rawDesc = []byte{
 	0x03, 0x6b, 0x65, 0x79, 0x12, 0x2c, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x6f, 0x64,
 	0x75, 0x63, 0x74, 0x51, 0x75, 0x61, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x52, 0x05, 0x76, 0x61, 0x6c,
-	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x46, 0x0a, 0x12, 0x50, 0x72, 0x69, 0x63, 0x65, 0x52,
-	0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06,
+	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x46, 0x0a, 0x12, 0x46, 0x61, 0x6d, 0x69, 0x6c, 0x79,
+	0x53, 0x70, 0x65, 0x63, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06,
 	0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x06, 0x72, 0x65,
 	0x73, 0x75, 0x6c, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x87,
@@ -3260,9 +3260,9 @@ var file_agent_proto_rawDesc = []byte{
 	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e, 0x63,
 	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4d, 0x0a, 0x14, 0x55,
 	0x70, 0x64, 0x61, 0x74, 0x65, 0x46, 0x61, 0x6d, 0x69, 0x6c, 0x79, 0x53, 0x70, 0x65, 0x63, 0x49,
-	0x6e, 0x66, 0x6f, 0x12, 0x18, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x69, 0x63,
-	0x65, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e,
-	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x72, 0x69, 0x63, 0x65, 0x52, 0x61, 0x6e, 0x67, 0x65,
+	0x6e, 0x66, 0x6f, 0x12, 0x18, 0x2e, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x46, 0x61, 0x6d, 0x69,
+	0x6c, 0x79, 0x53, 0x70, 0x65, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e,
+	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x46, 0x61, 0x6d, 0x69, 0x6c, 0x79, 0x53, 0x70, 0x65, 0x63,
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x46, 0x0a, 0x0f, 0x43, 0x72,
 	0x65, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61, 0x43, 0x61, 0x63, 0x68, 0x65, 0x12, 0x17, 0x2e,
 	0x61, 0x67, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x43, 0x61, 0x63, 0x68, 0x65, 0x52,
@@ -3327,8 +3327,8 @@ var file_agent_proto_goTypes = []any{
 	(*QuotaResponse)(nil),            // 33: agent.QuotaResponse
 	(*GetInstanceRequest)(nil),       // 34: agent.GetInstanceRequest
 	(*GetInstanceResponse)(nil),      // 35: agent.GetInstanceResponse
-	(*PriceRangeRequest)(nil),        // 36: agent.PriceRangeRequest
-	(*PriceRangeResponse)(nil),       // 37: agent.PriceRangeResponse
+	(*FamilySpecRequest)(nil),        // 36: agent.FamilySpecRequest
+	(*FamilySpecResponse)(nil),       // 37: agent.FamilySpecResponse
 	(*DataCacheRequest)(nil),         // 38: agent.DataCacheRequest
 	(*DataCacheOptions)(nil),         // 39: agent.DataCacheOptions
 	(*DataCacheResponse)(nil),        // 40: agent.DataCacheResponse
@@ -3336,7 +3336,7 @@ var file_agent_proto_goTypes = []any{
 	nil,                              // 42: agent.NodeRequest.IpPoolSegmentsEntry
 	nil,                              // 43: agent.NodeRequest.LabelsEntry
 	nil,                              // 44: agent.NodeRequest.ProductQuantityEntry
-	nil,                              // 45: agent.PriceRangeRequest.ProductQuantityEntry
+	nil,                              // 45: agent.FamilySpecRequest.ProductQuantityEntry
 	(*v1.ConfigMap)(nil),             // 46: k8s.io.api.core.v1.ConfigMap
 	(*v1.ConfigMapVolumeSource)(nil), // 47: k8s.io.api.core.v1.ConfigMapVolumeSource
 	(*v1.Secret)(nil),                // 48: k8s.io.api.core.v1.Secret
@@ -3380,14 +3380,14 @@ var file_agent_proto_depIdxs = []int32{
 	0,  // 30: agent.CreateWsTokenResponse.code:type_name -> agent.ActionCode
 	52, // 31: agent.QuotaRequest.quota:type_name -> k8s.io.api.core.v1.ResourceQuotaSpec
 	53, // 32: agent.QuotaStatusResponse.quota:type_name -> k8s.io.api.core.v1.ResourceQuotaStatus
-	45, // 33: agent.PriceRangeRequest.productQuantity:type_name -> agent.PriceRangeRequest.ProductQuantityEntry
+	45, // 33: agent.FamilySpecRequest.productQuantity:type_name -> agent.FamilySpecRequest.ProductQuantityEntry
 	41, // 34: agent.DataCacheRequest.network:type_name -> agent.DataCacheNetworkInfo
 	39, // 35: agent.DataCacheRequest.dest:type_name -> agent.DataCacheOptions
 	39, // 36: agent.DataCacheRequest.source:type_name -> agent.DataCacheOptions
 	0,  // 37: agent.DataCacheResponse.code:type_name -> agent.ActionCode
 	15, // 38: agent.NodeRequest.IpPoolSegmentsEntry.value:type_name -> agent.IpPoolSegments
 	18, // 39: agent.NodeRequest.ProductQuantityEntry.value:type_name -> agent.ProductQuantity
-	18, // 40: agent.PriceRangeRequest.ProductQuantityEntry.value:type_name -> agent.ProductQuantity
+	18, // 40: agent.FamilySpecRequest.ProductQuantityEntry.value:type_name -> agent.ProductQuantity
 	8,  // 41: agent.Agent.CreatePod:input_type -> agent.PodRequest
 	8,  // 42: agent.Agent.UpdatePod:input_type -> agent.PodRequest
 	9,  // 43: agent.Agent.DeletePod:input_type -> agent.PodDeleteRequest
@@ -3405,7 +3405,7 @@ var file_agent_proto_depIdxs = []int32{
 	23, // 55: agent.Agent.GetNodeUsage:input_type -> agent.NodeUsageRequest
 	29, // 56: agent.Agent.CreateWsToken:input_type -> agent.CreateWsTokenRequest
 	34, // 57: agent.Agent.GetECIInstances:input_type -> agent.GetInstanceRequest
-	36, // 58: agent.Agent.UpdateFamilySpecInfo:input_type -> agent.PriceRangeRequest
+	36, // 58: agent.Agent.UpdateFamilySpecInfo:input_type -> agent.FamilySpecRequest
 	38, // 59: agent.Agent.CreateDataCache:input_type -> agent.DataCacheRequest
 	38, // 60: agent.Agent.DeleteDataCache:input_type -> agent.DataCacheRequest
 	11, // 61: agent.Agent.CreatePod:output_type -> agent.PodResponse
@@ -3425,7 +3425,7 @@ var file_agent_proto_depIdxs = []int32{
 	26, // 75: agent.Agent.GetNodeUsage:output_type -> agent.NodeUsageResponse
 	30, // 76: agent.Agent.CreateWsToken:output_type -> agent.CreateWsTokenResponse
 	35, // 77: agent.Agent.GetECIInstances:output_type -> agent.GetInstanceResponse
-	37, // 78: agent.Agent.UpdateFamilySpecInfo:output_type -> agent.PriceRangeResponse
+	37, // 78: agent.Agent.UpdateFamilySpecInfo:output_type -> agent.FamilySpecResponse
 	40, // 79: agent.Agent.CreateDataCache:output_type -> agent.DataCacheResponse
 	40, // 80: agent.Agent.DeleteDataCache:output_type -> agent.DataCacheResponse
 	61, // [61:81] is the sub-list for method output_type

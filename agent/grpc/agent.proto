@@ -24,7 +24,7 @@ service Agent {
     rpc GetNodeUsage(NodeUsageRequest) returns (NodeUsageResponse) {}
     rpc CreateWsToken(CreateWsTokenRequest) returns (CreateWsTokenResponse) {}
     rpc GetECIInstances(GetInstanceRequest) returns (GetInstanceResponse) {}
-    rpc UpdateFamilySpecInfo(PriceRangeRequest) returns (PriceRangeResponse) {}
+    rpc UpdateFamilySpecInfo(FamilySpecRequest) returns (FamilySpecResponse) {}
     rpc CreateDataCache(DataCacheRequest) returns (DataCacheResponse) {}
     rpc DeleteDataCache (DataCacheRequest) returns (DataCacheResponse) {}
 }
@@ -266,11 +266,11 @@ message GetInstanceResponse {
     repeated string InstanceIds=1;
 }
 
-message PriceRangeRequest {
+message FamilySpecRequest {
     map<string, ProductQuantity> productQuantity = 1;
 }
 
-message PriceRangeResponse {
+message FamilySpecResponse {
     bool result = 1;
     string message = 2;
 }
