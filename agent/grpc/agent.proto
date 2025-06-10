@@ -14,6 +14,7 @@ service Agent {
     rpc GetPod (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPods (PodInfoRequest) returns (PodInfoResponse) {}
     rpc GetPodStatus (PodInfoRequest) returns (PodInfoResponse) {}
+    rpc GetPodEvent (EventRequest) returns (EventResponse) {}
     rpc CheckResourceQuota (PodRequest) returns (QuotaResponse) {}
     rpc GetResourceQuota (QuotaRequest) returns (QuotaStatusResponse) {}
     rpc SetResourceQuota (QuotaRequest) returns (QuotaResponse) {}
@@ -309,4 +310,21 @@ message DataCacheNetworkInfo {
     string vlan = 2;
     string gateway = 3;
     string dns = 4;
+}
+
+message EventRequest  {
+    string name = 1;
+    string namespace = 2;
+}
+
+message PodEvent {
+    string name = 1;
+    string type = 2;
+    string message = 3;
+    string firstTimestamp = 4;
+    string lastTimestamp = 5;
+}
+
+message EventResponse {
+    repeated PodEvent events = 1;
 }

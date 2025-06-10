@@ -26,6 +26,7 @@ const (
 	Agent_GetPod_FullMethodName               = "/agent.Agent/GetPod"
 	Agent_GetPods_FullMethodName              = "/agent.Agent/GetPods"
 	Agent_GetPodStatus_FullMethodName         = "/agent.Agent/GetPodStatus"
+	Agent_GetPodEvent_FullMethodName          = "/agent.Agent/GetPodEvent"
 	Agent_CheckResourceQuota_FullMethodName   = "/agent.Agent/CheckResourceQuota"
 	Agent_GetResourceQuota_FullMethodName     = "/agent.Agent/GetResourceQuota"
 	Agent_SetResourceQuota_FullMethodName     = "/agent.Agent/SetResourceQuota"
@@ -52,6 +53,7 @@ type AgentClient interface {
 	GetPod(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	GetPods(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
 	GetPodStatus(ctx context.Context, in *PodInfoRequest, opts ...grpc.CallOption) (*PodInfoResponse, error)
+	GetPodEvent(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error)
 	CheckResourceQuota(ctx context.Context, in *PodRequest, opts ...grpc.CallOption) (*QuotaResponse, error)
 	GetResourceQuota(ctx context.Context, in *QuotaRequest, opts ...grpc.CallOption) (*QuotaStatusResponse, error)
 	SetResourceQuota(ctx context.Context, in *QuotaRequest, opts ...grpc.CallOption) (*QuotaResponse, error)
@@ -139,6 +141,16 @@ func (c *agentClient) GetPodStatus(ctx context.Context, in *PodInfoRequest, opts
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PodInfoResponse)
 	err := c.cc.Invoke(ctx, Agent_GetPodStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentClient) GetPodEvent(ctx context.Context, in *EventRequest, opts ...grpc.CallOption) (*EventResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventResponse)
+	err := c.cc.Invoke(ctx, Agent_GetPodEvent_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -286,6 +298,7 @@ type AgentServer interface {
 	GetPod(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	GetPods(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
 	GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error)
+	GetPodEvent(context.Context, *EventRequest) (*EventResponse, error)
 	CheckResourceQuota(context.Context, *PodRequest) (*QuotaResponse, error)
 	GetResourceQuota(context.Context, *QuotaRequest) (*QuotaStatusResponse, error)
 	SetResourceQuota(context.Context, *QuotaRequest) (*QuotaResponse, error)
@@ -329,6 +342,9 @@ func (UnimplementedAgentServer) GetPods(context.Context, *PodInfoRequest) (*PodI
 }
 func (UnimplementedAgentServer) GetPodStatus(context.Context, *PodInfoRequest) (*PodInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPodStatus not implemented")
+}
+func (UnimplementedAgentServer) GetPodEvent(context.Context, *EventRequest) (*EventResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPodEvent not implemented")
 }
 func (UnimplementedAgentServer) CheckResourceQuota(context.Context, *PodRequest) (*QuotaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckResourceQuota not implemented")
@@ -512,6 +528,24 @@ func _Agent_GetPodStatus_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AgentServer).GetPodStatus(ctx, req.(*PodInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Agent_GetPodEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EventRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServer).GetPodEvent(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Agent_GetPodEvent_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServer).GetPodEvent(ctx, req.(*EventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -784,6 +818,10 @@ var Agent_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPodStatus",
 			Handler:    _Agent_GetPodStatus_Handler,
+		},
+		{
+			MethodName: "GetPodEvent",
+			Handler:    _Agent_GetPodEvent_Handler,
 		},
 		{
 			MethodName: "CheckResourceQuota",
