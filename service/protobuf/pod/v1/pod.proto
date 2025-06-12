@@ -22,6 +22,7 @@ message EciPod {
   Pod Pod = 5;
   string spotStrategy = 6;
   string spotPrice = 7;
+  string runtime = 8;
 }
 
 enum PodStatusCode {
