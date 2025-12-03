@@ -391,6 +391,7 @@ type NASVolumeInfo struct {
 	Server        string                 `protobuf:"bytes,2,opt,name=server,proto3" json:"server,omitempty"`
 	Path          string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 	MountOptions  []string               `protobuf:"bytes,4,rep,name=mount_options,json=mountOptions,proto3" json:"mount_options,omitempty"`
+	ReadOnly      bool                   `protobuf:"varint,5,opt,name=read_only,json=readOnly,proto3" json:"read_only,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -451,6 +452,13 @@ func (x *NASVolumeInfo) GetMountOptions() []string {
 		return x.MountOptions
 	}
 	return nil
+}
+
+func (x *NASVolumeInfo) GetReadOnly() bool {
+	if x != nil {
+		return x.ReadOnly
+	}
+	return false
 }
 
 type Pod struct {
@@ -3018,13 +3026,14 @@ const file_agent_proto_rawDesc = "" +
 	"\x06source\x18\x01 \x01(\v2\x1a.k8s.io.api.core.v1.SecretH\x00R\x06source\x88\x01\x01\x12C\n" +
 	"\x06volume\x18\x02 \x01(\v2&.k8s.io.api.core.v1.SecretVolumeSourceH\x01R\x06volume\x88\x01\x01B\t\n" +
 	"\a_sourceB\t\n" +
-	"\a_volume\"\x81\x01\n" +
+	"\a_volume\"\x9e\x01\n" +
 	"\rNASVolumeInfo\x12\x1f\n" +
 	"\vvolume_name\x18\x01 \x01(\tR\n" +
 	"volumeName\x12\x16\n" +
 	"\x06server\x18\x02 \x01(\tR\x06server\x12\x12\n" +
 	"\x04path\x18\x03 \x01(\tR\x04path\x12#\n" +
-	"\rmount_options\x18\x04 \x03(\tR\fmountOptions\"\xb4\x01\n" +
+	"\rmount_options\x18\x04 \x03(\tR\fmountOptions\x12\x1b\n" +
+	"\tread_only\x18\x05 \x01(\bR\breadOnly\"\xb4\x01\n" +
 	"\x03Pod\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x12containerGroupName\x18\x02 \x01(\tR\x12containerGroupName\x12,\n" +

@@ -67,6 +67,7 @@ message NASVolumeInfo {
     string server = 2;
     string path = 3;
     repeated string mount_options = 4;
+    bool read_only = 5;
 }
 
 message Pod {
